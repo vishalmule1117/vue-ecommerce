@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <Header />
+    <HomePage />
+    <Footer />
   </div>
 </template>
+<script setup>
+import HomePage from './layouts/HomePage.vue';
+</script>
