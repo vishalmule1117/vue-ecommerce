@@ -43,12 +43,11 @@ const isOpen = ref(false);
 const route = useRoute()
 
 const navLinks = [
-    { name: "index", href: "/" },
+    { name: "Home", href: "/" },
     { name: "Shop", href: "/shop" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-    { name: "Login", href: "/Login" },
-    { name: "signUp", href: "/SignUp" },
+    { name: "Basket", href: "/basket" },
+    { name: "Login / SignUp", href: "/Login" },
+    { name: "", href: "/SignUp" },
 ];
 </script>
 

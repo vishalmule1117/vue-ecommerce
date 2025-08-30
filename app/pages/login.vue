@@ -36,9 +36,14 @@
             <p class="mt-6 text-center text-sm text-gray-200">
                 Don’t have an account?
                 <span class="text-indigo-400 cursor-pointer hover:underline">
-                    Sign Up
+                    <NuxtLink to="/SignUp">Sign Up</NuxtLink>
                 </span>
             </p>
         </div>
     </div>
 </template>
+
+<script setup lang="js">
+import { NuxtLink } from '#components';
+
+</script>

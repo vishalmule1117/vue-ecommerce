@@ -42,10 +42,10 @@
             </form>
 
             <!-- Switch Mode -->
-            <p class="mt-6 text-center text-sm text-gray-200">
+            <p class="mt-6 text-center text-sm my-8 text-gray-200">
                 Already have an account?
                 <span class="text-indigo-400 cursor-pointer hover:underline">
-                    Sign In
+                    <NuxtLink to="/Login">Login</NuxtLink>
                 </span>
             </p>
         </div>
