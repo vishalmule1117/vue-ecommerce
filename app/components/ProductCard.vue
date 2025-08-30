@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 w-72">
+    <div v-for="productsList in productsList"
+        class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 w-72">
         <!-- Image -->
         <a href="#">
             <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&q=80"
@@ -13,7 +14,7 @@
 
             <!-- Product Name -->
             <p class="text-lg font-bold text-black truncate capitalize">
-                Product Name
+                {{ productsList.title }}
             </p>
 
             <!-- Price + Cart -->
@@ -37,3 +38,7 @@
         </div>
     </div>
 </template>
+
+<script setup>
+const { data: productsList } = await useFetch("https://node-rest-api-ecommerce.onrender.com/api/products/")
+</script>
