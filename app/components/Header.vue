@@ -47,7 +47,7 @@ const navLinks = [
     { name: "Shop", href: "/shop" },
     { name: "Basket", href: "/basket" },
     { name: "Login / SignUp", href: "/Login" },
-    { name: "", href: "/SignUp" },
+    { name: "", href: "/signup" },
 ];
 </script>
 

@@ -36,7 +36,7 @@
             <p class="mt-6 text-center text-sm text-gray-200">
                 Don’t have an account?
                 <span class="text-indigo-400 cursor-pointer hover:underline">
-                    <NuxtLink to="/SignUp">Sign Up</NuxtLink>
+                    <NuxtLink to="/signup">Sign Up</NuxtLink>
                 </span>
             </p>
         </div>
