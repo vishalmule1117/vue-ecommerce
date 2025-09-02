@@ -3,7 +3,7 @@
         <div v-if="pending">Pending</div>
         <div v-else-if="error">Error: {{ error.message }}</div>
         <div v-else v-for="item in data.data.productList" :key="item.id"
-            class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 w-72">
+            class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 mr-6 mb-6 w-72">
             <!-- Image -->
             <a href="#">
                 <img :src="item.images[0]" alt="Product image" class="h-80 w-72 object-cover" />
@@ -46,10 +46,8 @@
 const { data, pending, error } = await useFetch(
     "https://node-rest-api-ecommerce.onrender.com/api/products/",
     {
+        lazy: false,
         server: true, // force client-side fetch
-        retry: 3,      // retry if fails
-        retryDelay: 2000 // wait 2s between retries
     }
 );
-console.log(data.value)
 </script>
