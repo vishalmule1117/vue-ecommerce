@@ -16,7 +16,7 @@ const products = ref([]);
 const sortOption = ref([]);
 async function fetchProduct() {
     try {
-        let url = "http://localhost:3002/api/products/"
+        let url = "https://node-rest-api-ecommerce.onrender.com/api/products/"
         if (sortOption.value) {
             url += `?sort=${sortOption.value}`;
         }
