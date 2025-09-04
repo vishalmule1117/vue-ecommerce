@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto py-10 page-center">
+    <div class="container mx-auto py-10">
         <div class="flex justify-end my-8">
             <SortBy v-model="selectedSort" @update-sort="updateSort" />
         </div>
@@ -13,10 +13,11 @@
 <script setup>
 import { ref, onMounted } from "vue";
 const products = ref([]);
-const sortOption = ref([]);
+const sortOption = ref("title");
 async function fetchProduct() {
     try {
-        let url = "https://node-rest-api-ecommerce.onrender.com/api/products/"
+        // let url = "https://node-rest-api-ecommerce.onrender.com/api/products/";
+        let url = "http://localhost:3002/api/products/"
         if (sortOption.value) {
             url += `?sort=${sortOption.value}`;
         }
@@ -26,7 +27,7 @@ async function fetchProduct() {
         console.log(error);
     }
 }
-
+// function when sort drowndown change data will change
 function updateSort(value) {
     sortOption.value = value;
 }
