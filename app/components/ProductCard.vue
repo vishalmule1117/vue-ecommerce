@@ -1,8 +1,8 @@
 <template>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap justify-between">
         <div v-if="pending">Pending</div>
         <div v-else-if="error">Error: {{ error.message }}</div>
-        <div v-else v-for="item in data.productList" :key="item.id"
+        <div v-else v-for="item in products" :key="item._id"
             class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 mr-6 mb-6 w-72">
             <!-- Image -->
             <a href="#">
@@ -21,8 +21,8 @@
 
                 <!-- Price + Cart -->
                 <div class="flex items-center mt-3">
-                    <p class="text-lg font-semibold text-black">$149</p>
-                    <del class="ml-2 text-sm text-gray-600">$199</del>
+                    <p class="text-lg font-semibold text-black">${{ item.price }}</p>
+                    <!-- <del class="ml-2 text-sm text-gray-600">$199</del> -->
 
                     <!-- Add to Cart -->
                     <div class="ml-auto">
@@ -43,11 +43,10 @@
 </template>
 
 <script setup>
-const { data, pending, error } = await useFetch(
-    "http://localhost:3002/api/products/",
-    {
-        lazy: false,
-        server: true, // force client-side fetch
+defineProps({
+    products: {
+        type: Array,
+        required: true
     }
-);
+});
 </script>
