@@ -2,7 +2,7 @@
     <div class="flex flex-wrap">
         <div v-if="pending">Pending</div>
         <div v-else-if="error">Error: {{ error.message }}</div>
-        <div v-else v-for="item in data.data.productList" :key="item.id"
+        <div v-else v-for="item in data.productList" :key="item.id"
             class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 mr-6 mb-6 w-72">
             <!-- Image -->
             <a href="#">
@@ -44,7 +44,7 @@
 
 <script setup>
 const { data, pending, error } = await useFetch(
-    "https://node-rest-api-ecommerce.onrender.com/api/products/",
+    "http://localhost:3002/api/products/",
     {
         lazy: false,
         server: true, // force client-side fetch
