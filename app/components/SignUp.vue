@@ -60,12 +60,15 @@
 <script setup>
 //! State varibale
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const name = ref("");
 const email = ref("");
 const password = ref("");
 const message = ref("");
 const error = ref("");
+
+const router = useRouter();
 
 const handelSignup = async () => {
     try {
@@ -83,6 +86,12 @@ const handelSignup = async () => {
 
         message.value = data.msg || "Signup successful!";
         error.value = "";
+
+        //Redirect Login page 
+        setTimeout(() => {
+            router.push("/login");
+        }, 2000);
+
     } catch (err) {
         error.value = err.message;
         message.value = "";
