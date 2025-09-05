@@ -8,10 +8,13 @@
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex space-x-6">
-                <NuxtLink v-for="link in navLinks" :key="link.name" :to="link.href"
-                    class="text-gray-800 hover:text-indigo-600 transition font-medium">
-                    {{ link.name }}
-                </NuxtLink>
+                <li v-for="link in navLinks" :key="link.name">
+                    <button v-if="link.action === 'logout'" @click="handleLogout" class="hover:underline">
+                        {{ link.name }}
+                    </button>
+
+                    <NuxtLink v-else :to="link.href" class="hover:underline">{{ link.name }}</NuxtLink>
+                </li>
             </nav>
 
             <!-- Mobile Hamburger -->
@@ -38,17 +41,30 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-const isOpen = ref(false);
-const route = useRoute()
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuth } from '../composables/useAuth'
 
-const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Shop", href: "/shop" },
-    { name: "Basket", href: "/basket" },
-    { name: "Login / SignUp", href: "/Login" },
-    { name: "", href: "/signup" },
-];
+
+const router = useRouter()
+const { isLoggedIn, logout } = useAuth()
+
+
+// Short and clean navLinks — only the last item swaps
+const navLinks = computed(() => [
+    { name: 'Home', href: '/' },
+    { name: 'Shop', href: '/shop' },
+    { name: 'Basket', href: '/basket' },
+    isLoggedIn.value
+        ? { name: 'Logout', action: 'logout' }
+        : { name: 'Login / Sign Up', href: '/login' }
+])
+
+
+const handleLogout = async () => {
+    await logout({ callServer: true })
+    router.push('/login')
+}
 </script>
 
 <style>

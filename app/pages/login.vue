@@ -46,7 +46,8 @@
 <script setup lang="js">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import { useAuth } from "../composables/useAuth";
+const { login } = useAuth();
 const email = ref("");
 const password = ref("");
 const router = useRouter();
@@ -59,7 +60,7 @@ const handleLogin = async () => {
         });
         // Save JWT
         localStorage.setItem("token", res.token);
-
+        login(res.token, res.user);
         // redirect after Login
         router.push("/shop");
     } catch (err) {
