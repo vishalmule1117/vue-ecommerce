@@ -20,8 +20,8 @@ const pending = ref(false);
 async function fetchProduct() {
     try {
         pending.value = true;
-        // let url = "https://node-rest-api-ecommerce.onrender.com/api/products/";
-        let url = "http://localhost:3002/api/products/"
+        let url = "https://node-rest-api-ecommerce.onrender.com/api/products/";
+        // let url = "http://localhost:3002/api/products/"
 
         if (sortOption.value) {
             url += `?sort=${sortOption.value}`;
