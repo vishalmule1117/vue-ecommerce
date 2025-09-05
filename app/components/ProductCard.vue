@@ -1,8 +1,6 @@
 <template>
     <div class="flex flex-wrap justify-between">
-        <div v-if="pending">Pending</div>
-        <div v-else-if="error">Error: {{ error.message }}</div>
-        <div v-else v-for="item in products" :key="item._id"
+        <div v-for="item in products" :key="item._id"
             class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 mr-6 mb-6 w-72">
             <!-- Image -->
             <a href="#">

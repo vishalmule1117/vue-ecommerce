@@ -15,16 +15,16 @@
                 <h2 class="text-lg font-semibold text-white mb-4">Quick Links</h2>
                 <ul class="space-y-2">
                     <li>
-                        <NuxtLink to="/" class="hover:text-white transition">Home</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Home</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/about" class="hover:text-white transition">About</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">About</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/services" class="hover:text-white transition">Services</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Services</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/contact" class="hover:text-white transition">Contact</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Contact</NuxtLink>
                     </li>
                 </ul>
             </div>
@@ -34,16 +34,16 @@
                 <h2 class="text-lg font-semibold text-white mb-4">Resources</h2>
                 <ul class="space-y-2">
                     <li>
-                        <NuxtLink to="/blog" class="hover:text-white transition">Blog</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Blog</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/faq" class="hover:text-white transition">FAQ</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">FAQ</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/privacy" class="hover:text-white transition">Privacy Policy</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Privacy Policy</NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="/terms" class="hover:text-white transition">Terms & Conditions</NuxtLink>
+                        <NuxtLink to="" class="hover:text-white transition">Terms & Conditions</NuxtLink>
                     </li>
                 </ul>
             </div>
