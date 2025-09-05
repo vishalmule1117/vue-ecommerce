@@ -8,11 +8,11 @@
                 Welcome Back
             </h2>
 
-            <form class="space-y-4">
+            <form class="space-y-4" @submit.prevent="handleLogin">
                 <!-- Email -->
                 <div>
                     <label class="block text-white text-sm">Email</label>
-                    <input type="email"
+                    <input v-model="email" type="email"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
                         placeholder="Enter your email" />
                 </div>
@@ -20,13 +20,13 @@
                 <!-- Password -->
                 <div>
                     <label class="block text-white text-sm">Password</label>
-                    <input type="password"
+                    <input v-model="password" type="password"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
                         placeholder="Enter your password" />
                 </div>
 
                 <!-- Submit -->
-                <button type="button"
+                <button type="submit"
                     class="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition">
                     Sign In
                 </button>
@@ -44,6 +44,27 @@
 </template>
 
 <script setup lang="js">
-import { NuxtLink } from '#components';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const email = ref("");
+const password = ref("");
+const router = useRouter();
+
+const handleLogin = async () => {
+    try {
+        const res = await $fetch("https://node-rest-api-ecommerce.onrender.com/api/auth/login", {
+            method: "POST",
+            body: { email: email.value, password: password.value },
+        });
+        // Save JWT
+        localStorage.setItem("token", res.token);
+
+        // redirect after Login
+        router.push("/shop");
+    } catch (err) {
+        alert("Login failed ❌: " + (err?.data?.msg || err.message));
+    }
+}
 
 </script>
