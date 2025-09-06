@@ -8,13 +8,15 @@
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex space-x-6">
-                <li v-for="link in navLinks" :key="link.name">
-                    <button v-if="link.action === 'logout'" @click="handleLogout" class="hover:underline">
-                        {{ link.name }}
-                    </button>
+                <ul class="md:flex space-x-6">
+                    <li v-for="link in navLinks" :key="link.name">
+                        <NuxtLink v-if="link.action === 'logout'" @click="handleLogout" class="hover:underline">
+                            {{ link.name }}
+                        </NuxtLink>
 
-                    <NuxtLink v-else :to="link.href" class="hover:underline">{{ link.name }}</NuxtLink>
-                </li>
+                        <NuxtLink v-else :to="link.href" class="hover:underline">{{ link.name }}</NuxtLink>
+                    </li>
+                </ul>
             </nav>
 
             <!-- Mobile Hamburger -->
