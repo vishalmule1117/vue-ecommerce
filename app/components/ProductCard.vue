@@ -1,28 +1,13 @@
 <template>
     <div class="flex flex-wrap justify-between">
-        <div v-for="item in products" :key="item._id"
-            class="bg-white shadow-md rounded-xl overflow-hidden hover:scale-105 hover:shadow-xl duration-500 mr-6 mb-6 w-72">
-            <!-- Image -->
-            <a href="#">
-                <img :src="item.images[0]" alt="Product image" class="h-80 w-72 object-cover" />
-            </a>
-
-            <!-- Content -->
-            <div class="px-4 py-3">
-                <!-- Brand -->
-                <span class="text-gray-400 mr-3 uppercase text-xs">{{ item.brand }}</span>
-
-                <!-- Product Name -->
-                <p class="text-lg font-bold text-black truncate capitalize">
-                    {{ item.title }}
-                </p>
-
-                <!-- Price + Cart -->
-                <div class="flex items-center mt-3">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
+            <!-- Product Card -->
+            <div class="bg-white rounded-2xl shadow-md p-4" v-for="item in products" :key="item._id">
+                <img :src="item.images[0]" alt="Product" class="w-full md:-80 object-cover rounded-lg">
+                <span class="text-gray-400 py-3 uppercase text-xs">{{ item.brand }}</span>
+                <h3 class="text-lg font-bold text-black truncate capitalize">{{ item.title }}</h3>
+                <div class="flex">
                     <p class="text-lg font-semibold text-black">${{ item.price }}</p>
-                    <!-- <del class="ml-2 text-sm text-gray-600">$199</del> -->
-
-                    <!-- Add to Cart -->
                     <div class="ml-auto">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -37,6 +22,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
