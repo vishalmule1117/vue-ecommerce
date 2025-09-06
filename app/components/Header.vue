@@ -46,7 +46,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
-
+const isOpen = ref(false);
 
 const router = useRouter()
 const { isLoggedIn, logout } = useAuth()
