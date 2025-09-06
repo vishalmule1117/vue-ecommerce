@@ -6,7 +6,7 @@
         <div v-if="pending" class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
             <!-- Skeleton Loader (show when loading) -->
             <div v-for="n in 8" :key="n" class="bg-white rounded-2xl shadow-md p-4 animate-pulse">
-                <div class="w-full h-40 bg-gray-200 rounded-lg"></div>
+                <div class="w-full h-60 bg-gray-200 rounded-lg"></div>
                 <div class="mt-3 h-4 bg-gray-200 rounded w-3/4"></div>
                 <div class="mt-2 h-4 bg-gray-200 rounded w-1/2"></div>
                 <div class="mt-2 h-4 bg-gray-200 rounded w-1/3"></div>
