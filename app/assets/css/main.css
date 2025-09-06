@@ -409,4 +409,4 @@ input:-webkit-autofill:active {
   background-clip: text;
 }
 @import "tailwindcss";
-@import "./homepage.css";
+@import "./all.css";

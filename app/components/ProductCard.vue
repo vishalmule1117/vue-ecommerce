@@ -4,7 +4,7 @@
             <!-- Product Card -->
             <div class="bg-white rounded-2xl shadow-md p-4" v-for="item in products" :key="item._id">
                 <img :src="item.images[0]" alt="Product" class="w-full md:-80 object-cover rounded-lg">
-                <span class="text-gray-400 py-3 uppercase text-xs">{{ item.brand }}</span>
+                <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
                 <h3 class="text-lg font-bold text-black truncate capitalize">{{ item.title }}</h3>
                 <div class="flex">
                     <p class="text-lg font-semibold text-black">${{ item.price }}</p>
