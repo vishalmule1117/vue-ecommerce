@@ -4,7 +4,7 @@ import { NuxtLink } from '#components';
 </script>
 
 <template>
-    <div class="container mx-auto flex items-center justify-between py-10 page-center">
+    <div class="container min-h-screen mx-auto flex items-start justify-between py-10 page-center">
         <div class="empty-basket">
             <h1 class="text-3xl">Basket</h1>
             <p class="mb-8">Your basket is empty.</p>
