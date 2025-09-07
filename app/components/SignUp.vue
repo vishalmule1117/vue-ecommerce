@@ -15,7 +15,7 @@
                     <label class="block text-white text-sm">Full Name</label>
                     <input v-model="name" type="text"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
-                        placeholder="Enter your name" />
+                        placeholder="Enter your name" required="" />
                 </div>
 
                 <!-- Email -->
@@ -23,7 +23,7 @@
                     <label class="block text-white text-sm">Email</label>
                     <input v-model="email" type="email"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
-                        placeholder="Enter your email" />
+                        placeholder="Enter your email" required="" />
                 </div>
 
                 <!-- Password -->
@@ -31,7 +31,7 @@
                     <label class="block text-white text-sm">Password</label>
                     <input v-model="password" type="password"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
-                        placeholder="Enter your password" />
+                        placeholder="Enter your password" required="" />
                 </div>
 
                 <!-- Submit -->
@@ -40,11 +40,6 @@
                     Sign Up
                 </button>
             </form>
-
-            <div>
-                <p v-if="message" class="mt-4 text-center text-sm text-green-400">{{ message }}</p>
-                <p v-if="error" class="mt-4 text-center text-sm text-red-400">{{ error }}</p>
-            </div>
 
             <!-- Switch Mode -->
             <p class="mt-6 text-center text-sm my-8 text-gray-200">
@@ -61,12 +56,10 @@
 //! State varibale
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import { toast } from "vue3-toastify";
 const name = ref("");
 const email = ref("");
 const password = ref("");
-const message = ref("");
-const error = ref("");
 
 const router = useRouter();
 
@@ -84,17 +77,22 @@ const handelSignup = async () => {
         const data = await res.json();
         if (!res.ok) throw new Error(data.msg || "Signup Failed");
 
-        message.value = data.msg || "Signup successful!";
-        error.value = "";
+        toast.success(data.msg || "Signup Sucessfull!", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+        })
 
         //Redirect Login page 
         setTimeout(() => {
             router.push("/login");
-        }, 2000);
+        }, 3000);
 
     } catch (err) {
-        error.value = err.message;
-        message.value = "";
+        // ❌ Error toast
+        toast.error(err.message || "Signup failed", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+        });
     }
 }
 </script>

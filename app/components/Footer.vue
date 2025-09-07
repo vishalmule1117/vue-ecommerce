@@ -53,9 +53,12 @@
         <div class="border-t border-white/10 mt-8 pt-6 text-center text-sm text-gray-300">
             © {{ new Date().getFullYear() }} MyBrand. All rights reserved.
         </div>
+
+
     </footer>
 </template>
 
 <script setup>
-// No extra script needed
+import { ref } from 'vue'
+
 </script>

@@ -14,7 +14,7 @@
                     <label class="block text-white text-sm">Email</label>
                     <input v-model="email" type="email"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
-                        placeholder="Enter your email" />
+                        placeholder="Enter your email" required="" />
                 </div>
 
                 <!-- Password -->
@@ -22,7 +22,7 @@
                     <label class="block text-white text-sm">Password</label>
                     <input v-model="password" type="password"
                         class="w-full px-4 py-2 rounded-xl bg-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-indigo-400"
-                        placeholder="Enter your password" />
+                        placeholder="Enter your password" required="" />
                 </div>
 
                 <!-- Submit -->
@@ -46,6 +46,7 @@
 <script setup lang="js">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
 import { useAuth } from "../composables/useAuth";
 const { login } = useAuth();
 const email = ref("");
@@ -61,10 +62,21 @@ const handleLogin = async () => {
         // Save JWT
         localStorage.setItem("token", res.token);
         login(res.token, res.user);
+
+        toast.success("Login successful!", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 2000
+        });
+
         // redirect after Login
-        router.push("/shop");
+        setTimeout(() => {
+            router.push("/shop");
+        }, 3000)
     } catch (err) {
-        alert("Login failed ❌: " + (err?.data?.msg || err.message));
+        toast.error("Login failed", {
+            position: "top-center",
+            autoClose: 3000,
+        });
     }
 }
 
