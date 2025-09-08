@@ -1,38 +1,41 @@
 <template>
     <Carousel v-bind="config">
         <Slide v-for="product in products" :key="product._id">
-            <ProductCard :products="products" />
+            <div class="grid  gap-6 p-4">
+                <ProductCard :item="product" />
+            </div>
         </Slide>
 
         <template #addons>
             <Navigation />
-            <Pagination />
         </template>
     </Carousel>
 </template>
 <script setup>
 import 'vue3-carousel/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import { ref, onMounted } from 'vue'
 const config = {
-    itemsToShow: 1,
+    itemsToShow: 5,
     snapAlign: 'center',
-    autoplay: 5000,
-    wrapAround: false,
+    autoplay: 0,
+    wrapAround: 5000,
     gap: 10,
     breakpoints: {
-        1024: { itemsToShow: 1 },
-        768: { itemsToShow: 2 },
+        1024: { itemsToShow: 5 },
+        768: { itemsToShow: 3 },
         480: { itemsToShow: 1 }
     }
 }
 
 // Props: accept full product array from parent
-defineProps({
+const props = defineProps({
     products: {
-        type: Array,
+        type: Object,
         required: true,
     }
 })
+
+console.log(props.products)
 
 </script>

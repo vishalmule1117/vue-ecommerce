@@ -13,7 +13,11 @@
             </div>
         </div>
         <div v-else class="flex flex-colmd:flex-row">
-            <ProductCard :products="products" />
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
+                <div v-for="product in products" :key="product._id">
+                    <ProductCard :item="product" />
+                </div>
+            </div>
         </div>
 
     </div>
