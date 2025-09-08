@@ -1,3 +1,55 @@
 .page-center {
   margin-top: 65px;
 }
+.ProductSlider {
+  width: 250px;
+}
+.ProductSlider img {
+  height: 150px;
+}
+.home-page-banner img {
+  width: 100%;
+}
+
+.carousel__prev,
+.carousel__next {
+  background: #fff; /* white background */
+  border-radius: 50%; /* circular */
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff; /* arrow color */
+  font-size: 20px; /* arrow size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 10;
+  position: absolute;
+}
+
+.carousel__prev:hover svg,
+.carousel__next:hover svg {
+  background: #000; /* black on hover */
+  color: #fff; /* white arrow */
+}
+
+.carousel__prev {
+  left: 60px; /* adjust distance from left */
+}
+
+.carousel__next {
+  right: 60px; /* adjust distance from right */
+}
+
+.carousel__icon {
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .ProductSlider {
+    width: 300px;
+  }
+}
