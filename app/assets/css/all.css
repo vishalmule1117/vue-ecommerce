@@ -2,13 +2,13 @@
   margin-top: 65px;
 }
 .ProductSlider {
-  width: 250px;
+  width: 100%;
 }
 .home-page-banner .carousel {
   height: 400px;
 }
 .ProductSlider img {
-  height: 150px;
+  height: 250px;
 }
 .home-page-banner img {
   width: 100%;
@@ -53,7 +53,7 @@
 
 @media screen and (max-width: 768px) {
   .ProductSlider {
-    width: 300px;
+    width: 100%;
   }
   .home-page-banner .carousel {
     height: auto;

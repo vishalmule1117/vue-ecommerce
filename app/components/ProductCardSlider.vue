@@ -20,8 +20,8 @@ const config = {
     autoplay: 0,
     wrapAround: true,
     breakpoints: {
-        1024: { itemsToShow: 5 },
-        420: { itemsToShow: 1.5, gap: 5 }
+        1024: { itemsToShow: 4 },
+        420: { itemsToShow: 1.5, gap: 1 }
     }
 }
 

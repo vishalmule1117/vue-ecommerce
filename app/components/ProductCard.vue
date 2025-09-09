@@ -32,9 +32,8 @@
 
 <script setup>
 import { useAuthModal } from '../composables/useAuthModal'
-// import { useAuth } from '../composables/useAuth'
-const { isLoggedIn } = useAuth()
-const authModal = useAuthModal()
+
+const authModal = useAuthModal();
 // ✅ Function to open modal
 const openAuthModal = () => {
     authModal.value = true
