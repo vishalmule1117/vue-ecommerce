@@ -5,14 +5,13 @@
         </Slide>
 
         <template #addons>
-            <Navigation />
             <Pagination />
         </template>
     </Carousel>
 </template>
 <script setup>
 import 'vue3-carousel/carousel.css'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Carousel, Slide, Pagination } from 'vue3-carousel'
 
 const images = Array.from({ length: 2 }, (_, index) => ({
     id: index + 1,
@@ -20,10 +19,9 @@ const images = Array.from({ length: 2 }, (_, index) => ({
 }))
 
 const config = {
-    height: 400,
     itemsToShow: 1,
     gap: 5,
-    autoplay: 2000,
+    autoplay: 0,
     wrapAround: true,
 }
 </script>

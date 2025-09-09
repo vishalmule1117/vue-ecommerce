@@ -18,17 +18,17 @@ import { ref, onMounted } from 'vue'
 const config = {
     snapAlign: 'center',
     autoplay: 0,
-    wrapAround: 5000,
+    wrapAround: true,
     breakpoints: {
         1024: { itemsToShow: 5 },
-        460: { itemsToShow: 1.5, gap: 5 }
+        420: { itemsToShow: 1.5, gap: 5 }
     }
 }
 
 // Props: accept full product array from parent
 const props = defineProps({
     products: {
-        type: Object,
+        type: Array,
         required: true,
     }
 })

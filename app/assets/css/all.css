@@ -4,6 +4,9 @@
 .ProductSlider {
   width: 250px;
 }
+.home-page-banner .carousel {
+  height: 400px;
+}
 .ProductSlider img {
   height: 150px;
 }
@@ -39,7 +42,7 @@
   left: 60px; /* adjust distance from left */
 }
 
-.carousel__next {
+..carousel__next {
   right: 60px; /* adjust distance from right */
 }
 
@@ -51,5 +54,8 @@
 @media screen and (max-width: 768px) {
   .ProductSlider {
     width: 300px;
+  }
+  .home-page-banner .carousel {
+    height: auto;
   }
 }

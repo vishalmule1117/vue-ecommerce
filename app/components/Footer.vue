@@ -54,7 +54,6 @@
             © {{ new Date().getFullYear() }} MyBrand. All rights reserved.
         </div>
 
-
     </footer>
 </template>
 

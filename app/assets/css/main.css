@@ -1,3 +1,5 @@
+@import "tailwindcss";
+@import "./all.css";
 html {
   box-sizing: border-box;
   text-size-adjust: 100%;
@@ -88,15 +90,6 @@ main {
   * Correct the font size and margin on `h1` elements within `section` and
   * `article` contexts in Chrome, Firefox, and Safari.
   */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
 
 /* Grouping content
     ========================================================================== */
@@ -408,5 +401,3 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   background-clip: text;
 }
-@import "tailwindcss";
-@import "./all.css";

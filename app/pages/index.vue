@@ -26,14 +26,13 @@ import axios from 'axios';
 import BannerSlider from '~/components/BannerSlider.vue';
 const products = ref([]);
 const error = ref(false);
-
+const showModal = ref(false);
 
 // Fetch products from API
 onMounted(async () => {
     try {
         const response = await axios.get('https://node-rest-api-ecommerce.onrender.com/api/products/')
         products.value = response.data.productList || [];
-        console.log(products.value)
     } catch (err) {
         console.error('Failed to fetch products', err);
         error.value = true;
