@@ -65,13 +65,13 @@ const handleLogin = async () => {
 
         toast.success("Login successful!", {
             position: toast.POSITION.TOP_RIGHT,
-            autoClose: 2000
+            autoClose: 500
         });
 
         // redirect after Login
         setTimeout(() => {
             router.push("/shop");
-        }, 3000)
+        }, 1000)
     } catch (err) {
         toast.error("Login failed", {
             position: "top-center",

@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+    <CartDrawer />
 
   </div>
 </template>
