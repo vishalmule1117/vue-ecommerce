@@ -33,15 +33,29 @@
   </div>
 </template>
 <script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 import "vue3-toastify/dist/index.css";
 import HomePage from './layouts/HomePage.vue';
-
+const products = ref([]);
+const error = ref(false);
 import { useAuthModal } from './composables/useAuthModal'
 const authModal = useAuthModal() // MUST be inside setup
-const tab = ref('login')
+
 
 const closeAuthModal = () => {
   authModal.value = false;
 }
+
+// Fetch products from API
+onMounted(async () => {
+  try {
+    const response = await axios.get('https://node-rest-api-ecommerce.onrender.com/api/products/')
+    products.value = response.data.productList || [];
+  } catch (err) {
+    console.error('Failed to fetch products', err);
+    error.value = true;
+  }
+})
 
 </script>
