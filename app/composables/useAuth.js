@@ -1,20 +1,25 @@
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 
 // ① export a function named `useAuth` so Nuxt auto-imports if needed
 export function useAuth() {
   // ② Use Nuxt's useState for SSR-friendly shared state
-  const token = useState("auth_token", () =>
-    process.client ? localStorage.getItem("token") : null
-  );
+  const token = useState("auth_token", () => null);
   const user = useState("auth_user", () => null);
 
   // ③ computed convenience
   const isLoggedIn = computed(() => !!token.value);
 
+  onMounted(() => {
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) {
+      token.value = savedToken;
+    }
+  });
+
   // ④ Save token + optional user data
   async function login(newToken, userData = null) {
     token.value = newToken;
-    if (process.client) localStorage.setItem("token", newToken);
+    localStorage.setItem("token", newToken);
     if (userData) user.value = userData;
   }
 
@@ -43,7 +48,7 @@ export function useAuth() {
     // clear client state
     token.value = null;
     user.value = null;
-    if (process.client) localStorage.removeItem("token");
+    localStorage.removeItem("token");
   }
 
   // ⑥ helper to add Authorization header on requests

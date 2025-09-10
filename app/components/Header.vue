@@ -60,12 +60,13 @@ const navLinks = computed(() => [
     isLoggedIn.value
         ? { name: 'Logout', action: 'logout' }
         : { name: 'Login / Sign Up', href: '/login' }
-])
+]);
+
 
 
 const handleLogout = async () => {
     await logout({ callServer: true })
-    router.push('/login')
+    router.push('/')
 }
 </script>
 

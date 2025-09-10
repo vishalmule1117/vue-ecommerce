@@ -37,7 +37,7 @@ const { isLoggedIn } = useAuth();
 
 const authModal = useAuthModal();
 const cartDrawer = useCartDrawer();
-const cartItems = useCartItems()
+const { addToCart } = useCartItems();
 
 defineProps({
     item: {
@@ -51,7 +51,7 @@ const openAuthModal = () => {
     authModal.value = true;
 }
 const handleAddToCart = (item) => {
-    cartItems.value.push(item);
+    addToCart(item);
     cartDrawer.value = true;
 }
 

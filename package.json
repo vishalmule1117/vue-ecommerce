@@ -20,5 +20,8 @@
     "vue-slick-carousel": "^1.0.6",
     "vue3-carousel": "^0.16.0",
     "vue3-toastify": "^0.2.8"
+  },
+  "devDependencies": {
+    "@nuxt/icon": "^2.0.0"
   }
 }

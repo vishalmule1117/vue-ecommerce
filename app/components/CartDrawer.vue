@@ -18,6 +18,9 @@
                         <p class="font-medium">{{ item.title }}</p>
                         <p class="text-sm text-gray-500">{{ item.price }}</p>
                     </div>
+                    <div class="cursor-pointer" @click="removeFromCart(item._id)">
+                        <Icon name="uil:trash-alt" style="color: black" />
+                    </div>
                 </div>
 
             </div>
@@ -30,7 +33,7 @@
 <script setup>
 import { useCartDrawer, useCartItems } from '../composables/useCartDrawer';
 const cartDrawer = useCartDrawer();
-const cartItems = useCartItems();
+const { items: cartItems, removeFromCart } = useCartItems();
 
 const closeDrawer = () => {
     cartDrawer.value = false;
