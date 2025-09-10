@@ -7,18 +7,41 @@
             :class="cartDrawer ? 'translate-x-0' : 'translate-x-full'">
             <div class="p-4 flex justify-between items-center border-b">
                 <h2 class="text-lg font-bold">Your Cart</h2>
-                <button @click="closeDrawer" class="text-gray-500 hover:text-black">✕</button>
+                <button @click="closeDrawer" class="text-gray-500 hover:text-black cursor-pointer">✕</button>
             </div>
+            <div class="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
+                <div v-if="cartItems == 0" class="text-gray-500">Cart is Empty</div>
+
+                <div v-for="(item, index) in cartItems" :key="index" class="flex items-center space-x-3">
+                    <img :src="item.index[0]" alt="" class="w-16 h-16 rounded object-cover">
+                    <div class="flex-1">
+                        <p class="font-medium">{{ item.title }}</p>
+                        <p class="text-sm text-gray-500">{{ item.price }}</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 
 </template>
 
 <script setup>
-import { useCartDrawer } from '../composables/useCartDrawer';
-const cartDrawer = useCartDrawer()
+import { useCartDrawer, useCartItems } from '../composables/useCartDrawer';
+const cartDrawer = useCartDrawer();
+const cartItems = useCartItems();
 
 const closeDrawer = () => {
     cartDrawer.value = false;
 }
+
+
+// Props: accept full product array from parent
+defineProps({
+    item: {
+        type: Array,
+        required: true
+    },
+});
 </script>

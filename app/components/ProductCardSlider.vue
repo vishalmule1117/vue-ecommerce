@@ -31,8 +31,6 @@ const props = defineProps({
         type: Array,
         required: true,
     }
-})
-
-console.log(props.products)
+});
 
 </script>
