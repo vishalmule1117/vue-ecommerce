@@ -13,7 +13,11 @@ export const useCartItems = () => {
     const savedCartItems = localStorage.getItem("cartItems");
     if (savedCartItems) {
       try {
-        items.value = JSON.parse(savedCartItems);
+        items.value = JSON.parse(savedCartItems).map((item) => ({
+          ...item,
+          // Ensure quantity is at least 1
+          quantity: item.quantity || 1,
+        }));
       } catch {
         items.value = [];
       }
@@ -40,6 +44,7 @@ export const useCartItems = () => {
   // remove signle product by ID
   function removeFromCart(productID) {
     items.value = items.value.filter((item) => item._id !== productID);
+    localStorage.removeItem("cartItems");
   }
 
   //Clear all cart
@@ -48,5 +53,36 @@ export const useCartItems = () => {
     localStorage.removeItem("cartItems");
   }
 
-  return { items, removeFromCart, addToCart, clearCart };
+  // increase quantity
+  const increaseQty = (id) => {
+    const item = items.value.find((item) => item._id === id);
+    if (item) {
+      if (!item.quantity) {
+        item.quantity = 1;
+      }
+      if (item.quantity < 5) {
+        item.quantity++;
+      }
+    }
+  };
+
+  // decreaseQty quantity
+  const decreaseQty = (id) => {
+    const item = items.value.find((item) => item._id === id);
+    if (item && item.quantity > 1) {
+      item.quantity--;
+    }
+    // else if (item && item.quantity === 1) {
+    //   removeFromCart(id);
+    // }
+  };
+
+  return {
+    items,
+    removeFromCart,
+    addToCart,
+    clearCart,
+    increaseQty,
+    decreaseQty,
+  };
 };

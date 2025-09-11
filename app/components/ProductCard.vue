@@ -1,9 +1,9 @@
 <template>
     <!-- Product Card -->
     <div class="bg-white rounded-2xl shadow-md p-4">
-        <img :src="item.images[0]" alt="Product" class="w-full md:h-80 object-cover rounded-lg">
+        <img :src="item.images[0]" alt="Product" class="w-full md:h-60 object-cover rounded-lg">
         <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
-        <h3 class="text-lg font-bold text-black truncate capitalize">{{ item.title }}</h3>
+        <h3 class="text-lg font-bold text-black truncate capitalize h-[35px]">{{ item.title }}</h3>
         <div class="flex">
             <p class="text-lg font-semibold text-black">${{ item.price }}</p>
             <div class="ml-auto">

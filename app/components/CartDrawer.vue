@@ -11,15 +11,16 @@
             </div>
             <div class="p-4 space-y-4 overflow-y-auto h-[calc(100%-60px)]">
                 <div @click="clearCart">
-                    <div v-if="cartItems.length" class="cursor-pointer text-red-500 hover:text-red-700">Clear All
+                    <div v-if="cartItems.length" class="cursor-pointer text-red-500 text-right hover:text-red-700">Clear
+                        All
                     </div>
                 </div>
                 <div v-if="cartItems.length == 0" class="text-gray-500">Cart is Empty</div>
 
-                <div v-for="(item, index) in cartItems" :key="index" class="flex items-center space-x-3">
+                <div v-for="(item, index) in cartItems" :key="index" class="flex items-start space-x-3">
                     <img :src="item.images[0]" alt="" class="w-16 h-16 rounded object-cover">
                     <div class="flex-1">
-                        <p class="font-medium text-base font-semibold">{{ item.title }}</p>
+                        <p class="font-medium  capitalize text-base font-semibold">{{ item.title }}</p>
                         <p class="text-sm text-gray-500">{{ item.price }}</p>
                     </div>
                     <div class="cursor-pointer" @click="removeFromCart(item._id)">
