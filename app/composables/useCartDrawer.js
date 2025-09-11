@@ -42,5 +42,11 @@ export const useCartItems = () => {
     items.value = items.value.filter((item) => item._id !== productID);
   }
 
-  return { items, removeFromCart, addToCart };
+  //Clear all cart
+  function clearCart() {
+    items.value = [];
+    localStorage.removeItem("cartItems");
+  }
+
+  return { items, removeFromCart, addToCart, clearCart };
 };
