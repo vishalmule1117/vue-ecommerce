@@ -1,5 +1,5 @@
 import { ref, onMounted, watch } from "vue";
-
+import { toast } from "vue3-toastify";
 // Close and open Cart Drawer
 export const useCartDrawer = () => useState("cartDrawer", () => false);
 
@@ -62,6 +62,11 @@ export const useCartItems = () => {
       }
       if (item.quantity < 5) {
         item.quantity++;
+      } else {
+        toast.error("Only 5 units allowed per product!", {
+          position: "bottom-center",
+          autoClose: 1000,
+        });
       }
     }
   };
