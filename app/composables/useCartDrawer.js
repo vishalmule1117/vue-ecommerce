@@ -1,5 +1,6 @@
 import { ref, onMounted, watch } from "vue";
 import { toast } from "vue3-toastify";
+
 // Close and open Cart Drawer
 export const useCartDrawer = () => useState("cartDrawer", () => false);
 
