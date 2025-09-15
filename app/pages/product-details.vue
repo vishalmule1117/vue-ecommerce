@@ -26,7 +26,7 @@
 
                         <div class="flex-1 rounded-lg overflow-hidden border border-slate-200 bg-gray-50">
                             <img :src="product.images?.[0]" alt="Main product"
-                                class="w-full h-80 md:h-[520px] object-cover" />
+                                class="w-full h-80 md:h-[420px] object-contain" />
                         </div>
                     </div>
                 </div>
@@ -46,14 +46,20 @@
                     <p class="text-slate-600 mb-6 leading-relaxed">{{ product.description }}</p>
 
                     <div class="flex gap-3 items-center mb-6">
-                        <div class="flex items-center border rounded-lg overflow-hidden">
-                            <button class="px-3 py-2 text-lg" aria-label="Decrease">−</button>
-                            <div class="px-4 py-2 font-medium">1</div>
-                            <button class="px-3 py-2 text-lg" aria-label="Increase">+</button>
+                        <div v-if="quantity > 0" class="flex items-center border rounded-lg overflow-hidden">
+                            <button class="px-3 py-2 text-lg cursor-pointer" aria-label="Decrease"
+                                @click="decreaseQty(product._id)">−</button>
+                            <div class="px-4 py-2 font-medium">{{ quantity }}</div>
+                            <button class="px-3 py-2 text-lg cursor-pointer" aria-label="Increase"
+                                @click="increaseQty(product._id)">+</button>
                         </div>
+                        <NuxtLink else-if to="/basket" v-if="quantity > 0"
+                            class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition">
+                            View
+                            Basket</NuxtLink>
 
-                        <button
-                            class="flex-1 md:flex-none px-6 py-3 bg-sky-600 text-white font-semibold rounded-lg shadow hover:bg-sky-700">Add
+                        <button v-else @click="addToCart(product)"
+                            class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition">Add
                             to cart</button>
                     </div>
 
@@ -81,17 +87,21 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-
+import { useCartItems } from "../composables/useCartDrawer";
 const route = useRoute();
 const product = ref({});
 const pending = ref(false);
+const { items, addToCart, increaseQty, decreaseQty } = useCartItems();
+
+const quantity = computed(() => {
+    const item = items.value.find(i => i._id === product.value._id);
+    return item?.quantity || 0;
+});
 
 const fetchProduct = async () => {
     try {
         pending.value = true;
         const url = `https://node-rest-api-ecommerce.onrender.com/api/products/${route.query.id}`;
-        console.log(url);
-        console.log("Route params:", route);
         const res = await fetch(url);
 
         if (!res.ok) throw new Error("Failed to fetch product");
@@ -100,10 +110,6 @@ const fetchProduct = async () => {
 
         //Assign directly since backend returns the product object
         product.value = data;
-        console.log(data.title);
-
-        console.log("Fetched product:", product.value);
-
     } catch (error) {
         console.error("Error fetching product:", error);
     } finally {

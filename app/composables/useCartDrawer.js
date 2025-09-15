@@ -38,7 +38,9 @@ export const useCartItems = () => {
   function addToCart(product) {
     const exits = items.value.find((item) => item._id === product._id);
     if (!exits) {
-      items.value.push(product);
+      items.value.push({ ...product, quantity: 1 });
+    } else {
+      exits.quantity = 1;
     }
   }
 

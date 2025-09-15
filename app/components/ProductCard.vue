@@ -309,7 +309,7 @@ const getAllFavoriteProducts = () => {
     return getLocalFavs().filter(item => typeof item === 'object' && item !== null)
 }
 
-// 🛠️ Debug helpers (dev only)
+// 🛠️Debug helpers (dev only)
 if (isDev.value) {
     window.favoriteDebug = {
         validItemId,
