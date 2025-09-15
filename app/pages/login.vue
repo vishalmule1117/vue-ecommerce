@@ -64,7 +64,7 @@ const handleLogin = async () => {
         login(res.token, res.user);
 
         toast.success("Login successful!", {
-            position: toast.POSITION.TOP_RIGHT,
+            position: toast.POSITION.BOTTOM_CENTER,
             autoClose: 500
         });
 

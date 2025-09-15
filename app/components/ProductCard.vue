@@ -1,48 +1,55 @@
 <template>
     <!-- Product Card -->
     <div class="bg-white rounded-2xl shadow-md p-4 relative">
-        <img :src="item.images?.[0]" :alt="item.title || 'Product'" class="w-full md:h-60 object-cover rounded-lg">
+        <NuxtLink :to="`/product-details?id=${validItemId}&?name=${item.title}`">
+            <img :src="item.images?.[0]" :alt="item.title || 'Product'" class="w-full md:h-60 object-cover rounded-lg">
 
-        <!-- Only show favorite button if we have a valid ID -->
-        <div v-if="validItemId" class="absolute top-4 right-4" @click="toggleFav"
-            :class="isFav ? 'favourite-on' : 'favourite-off'">
-            <Icon :name="isFav ? 'mdi:heart' : 'mdi:heart-outline'" class="cursor-pointer transition-all duration-200"
-                :class="isFav ? 'text-red-500' : 'text-gray-400 hover:text-red-400'" style="font-size: 24px;" />
-        </div>
-
-        <!-- Debug warning for missing ID (dev only) -->
-        <div v-else-if="isDev" class="absolute top-4 right-4 bg-red-500 text-white text-xs p-1 rounded">
-            No ID
-        </div>
-
-        <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
-        <h3 class="text-lg font-bold text-black truncate capitalize h-[35px]">{{ item.title }}</h3>
-
-        <div class="flex items-center">
-            <p class="text-lg font-semibold text-black">${{ item.price }}</p>
-            <div class="ml-auto">
-                <button @click="openAuthModal" v-if="!isLoggedIn"
-                    class="p-1 hover:bg-gray-100 rounded transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                        class="bi bi-bag-plus text-black hover:text-green-600 transition-colors" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                        <path
-                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                    </svg>
-                </button>
-
-                <button @click="handleAddToCart(item)" v-else class="p-1 hover:bg-gray-100 rounded transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                        class="bi bi-bag-plus text-black hover:text-green-600 transition-colors" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                        <path
-                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                    </svg>
-                </button>
+            <!-- Only show favorite button if we have a valid ID -->
+            <div v-if="validItemId" class="absolute top-4 right-4" @click="toggleFav"
+                :class="isFav ? 'favourite-on' : 'favourite-off'">
+                <Icon :name="isFav ? 'mdi:heart' : 'mdi:heart-outline'"
+                    class="cursor-pointer transition-all duration-200"
+                    :class="isFav ? 'text-red-500' : 'text-gray-400 hover:text-red-400'" style="font-size: 24px;" />
             </div>
-        </div>
+
+            <!-- Debug warning for missing ID (dev only) -->
+            <div v-else-if="isDev" class="absolute top-4 right-4 bg-red-500 text-white text-xs p-1 rounded">
+                No ID
+            </div>
+
+            <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
+
+            <h3 class="text-lg font-bold text-black truncate capitalize h-[35px]">{{ item.title }}</h3>
+
+            <div class="flex items-center">
+                <p class="text-lg font-semibold text-black">${{ item.price }}</p>
+                <div class="ml-auto">
+                    <button @click="openAuthModal" v-if="!isLoggedIn"
+                        class="p-1 hover:bg-gray-100 rounded transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-bag-plus text-black hover:text-green-600 transition-colors"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                        </svg>
+                    </button>
+
+                    <button @click="handleAddToCart(item)" v-else
+                        class="p-1 hover:bg-gray-100 rounded transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-bag-plus text-black hover:text-green-600 transition-colors"
+                            viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                            <path
+                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </NuxtLink>
     </div>
 </template>
 
@@ -52,6 +59,7 @@ import { toast } from "vue3-toastify"
 import { useAuth } from '../composables/useAuth'
 import { useAuthModal } from '../composables/useAuthModal'
 import { useCartDrawer, useCartItems } from '../composables/useCartDrawer'
+import { NuxtLink } from "#components"
 
 const { isLoggedIn } = useAuth()
 const isFav = ref(false)
@@ -202,7 +210,10 @@ const handleAddToCart = (item) => {
     try {
         addToCart(item)
         cartDrawer.value = true
-        toast.success("🛒 Added to cart!", { autoClose: 1500 })
+        toast.success("🛒 Added to cart!", {
+            autoClose: 1500,
+            position: toast.POSITION.BOTTOM_CENTER,
+        })
     } catch (error) {
         console.error('Error adding to cart:', error)
         toast.error("❌ Failed to add to cart")
@@ -245,7 +256,7 @@ const toggleFav = () => {
             isFav.value = false
             toast.info("💔 Removed from favorites", {
                 autoClose: 1500,
-                position: "top-right"
+                position: toast.POSITION.BOTTOM_CENTER,
             })
             if (isDev.value) console.log('✅ Removed from favorites:', validItemId.value)
         } else {
@@ -273,8 +284,8 @@ const toggleFav = () => {
         if (setLocalFavs(newFavs)) {
             isFav.value = true
             toast.success(`❤️ Added "${props.item.title}" to favorites`, {
-                autoClose: 2000,
-                position: "top-right"
+                autoClose: 1000,
+                position: toast.POSITION.BOTTOM_CENTER,
             })
             if (isDev.value) {
                 console.log('✅ Added complete product to favorites:', createFavoriteProduct.value)
