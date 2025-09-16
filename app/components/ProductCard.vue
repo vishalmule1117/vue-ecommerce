@@ -26,7 +26,7 @@
             <p class="text-lg font-semibold text-black">${{ item.price }}</p>
             <div class="ml-auto">
                 <button @click="openAuthModal" v-if="!isLoggedIn"
-                    class="p-1 hover:bg-gray-100 rounded transition-colors">
+                    class="p-1 hover:bg-gray-100 rounded transition-colors cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                         class="bi bi-bag-plus text-black hover:text-green-600 transition-colors" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -36,7 +36,8 @@
                     </svg>
                 </button>
 
-                <button @click="handleAddToCart(item)" v-else class="p-1 hover:bg-gray-100 rounded transition-colors">
+                <button @click="handleAddToCart(item)" v-else
+                    class="p-1 hover:bg-gray-100 rounded transition-colors cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                         class="bi bi-bag-plus text-black hover:text-green-600 transition-colors" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"

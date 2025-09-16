@@ -1,5 +1,20 @@
 <template>
     <div class="min-h-screen container mx-auto py-10">
+        <!-- Breadcrumb -->
+        <nav class="text-sm text-slate-500 mb-6 mt-10" aria-label="Breadcrumb">
+            <ol class="flex gap-2 items-center">
+                <li>
+                    <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
+                </li>
+                <li>/</li>
+                <li>
+                    <NuxtLink to="/" class="hover:underline">Category</NuxtLink>
+                </li>
+                <li>/</li>
+                <li class="text-slate-700"> Product</li>
+            </ol>
+        </nav>
+
         <div class="flex justify-end my-8">
             <SortBy v-model="sortOption" />
         </div>
@@ -20,6 +35,9 @@
             </div>
         </div>
 
+        <div class="mt-6">
+            <Pagination v-model="page" :total-pages="5" />
+        </div>
     </div>
 </template>
 
@@ -28,19 +46,24 @@ import { ref, onMounted, watch } from "vue";
 const products = ref([]);
 const sortOption = ref("");
 const pending = ref(false);
+const page = ref(1);
 
 async function fetchProduct() {
     try {
         pending.value = true;
-        let url = "https://node-rest-api-ecommerce.onrender.com/api/products/";
+        let url = "https://node-rest-api-ecommerce.onrender.com/api/products?";
         // let url = "http://localhost:3002/api/products/"
 
         if (sortOption.value) {
-            url += `?sort=${sortOption.value}`;
+            url += `sort=${sortOption.value}&`;
+        }
+        if (page.value) {
+            url += `page=${page.value}`;
+            console.log(url)
         }
         const res = await $fetch(url);
-
         products.value = res.productList;
+
     } catch (error) {
         console.log(error);
     } finally {
@@ -51,9 +74,8 @@ async function fetchProduct() {
 
 
 // watch for sort changes and auto-refresh
-watch(sortOption, () => {
-    fetchProduct();
-});
+watch(sortOption, fetchProduct)
+watch(page, fetchProduct);
 
 // Load initial products
 onMounted(fetchProduct)

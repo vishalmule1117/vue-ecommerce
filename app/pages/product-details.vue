@@ -55,11 +55,10 @@
                         </div>
                         <NuxtLink else-if to="/basket" v-if="quantity > 0"
                             class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition">
-                            View
-                            Basket</NuxtLink>
+                            View Basket</NuxtLink>
 
                         <button v-else @click="addToCart(product)"
-                            class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition">Add
+                            class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition cursor-pointer">Add
                             to cart</button>
                     </div>
 
