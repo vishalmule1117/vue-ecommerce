@@ -18,7 +18,7 @@
         <div class="flex justify-end my-8">
             <SortBy v-model="sortOption" />
         </div>
-        <div v-if="pending" class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
+        <div v-if="pending" class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4 w-full">
             <!-- Skeleton Loader (show when loading) -->
             <div v-for="n in 8" :key="n" class="bg-white rounded-2xl shadow-md p-4 animate-pulse">
                 <div class="w-full h-60 bg-gray-200 rounded-lg"></div>
@@ -35,8 +35,8 @@
             </div>
         </div>
 
-        <div class="mt-6">
-            <Pagination v-model="page" :total-pages="5" />
+        <div class="mt-6 flex justify-end">
+            <Pagination v-model="page" :total-pages="totalPages" />
         </div>
     </div>
 </template>
@@ -47,23 +47,28 @@ const products = ref([]);
 const sortOption = ref("");
 const pending = ref(false);
 const page = ref(1);
+const totalPages = ref(1);
+const limit = 8;
 
 async function fetchProduct() {
     try {
         pending.value = true;
         let url = "https://node-rest-api-ecommerce.onrender.com/api/products?";
-        // let url = "http://localhost:3002/api/products/"
+        //let url = "http://localhost:3002/api/products/"
 
         if (sortOption.value) {
             url += `sort=${sortOption.value}&`;
         }
         if (page.value) {
-            url += `page=${page.value}`;
-            console.log(url)
+            url += `page=${page.value}&limit=${limit}`;
         }
         const res = await $fetch(url);
         products.value = res.productList;
 
+        // 🔹 If API provides totalCount, calculate pages
+        if (res.totalCount) {
+            totalPages.value = Math.ceil(res.totalCount / limit);
+        }
     } catch (error) {
         console.log(error);
     } finally {
@@ -75,7 +80,13 @@ async function fetchProduct() {
 
 // watch for sort changes and auto-refresh
 watch(sortOption, fetchProduct)
-watch(page, fetchProduct);
+watch(page, async () => {
+    await fetchProduct();
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    })
+});
 
 // Load initial products
 onMounted(fetchProduct)
