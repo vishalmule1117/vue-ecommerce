@@ -28,7 +28,7 @@
             </div>
         </div>
         <div v-else class="flex flex-colmd:flex-row">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 p-4 w-full">
                 <div v-for="product in products" :key="product._id">
                     <ProductCard :item="product" :productId="product._id || product.id" />
                 </div>
