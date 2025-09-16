@@ -58,9 +58,11 @@ async function fetchProduct() {
 
         if (sortOption.value) {
             url += `sort=${sortOption.value}&`;
+            console.log(url)
         }
         if (page.value) {
             url += `page=${page.value}&limit=${limit}`;
+            console.log(url)
         }
         const res = await $fetch(url);
         products.value = res.productList;

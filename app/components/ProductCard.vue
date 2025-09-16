@@ -11,11 +11,6 @@
                 :class="isFav ? 'text-red-500' : 'text-gray-400 hover:text-red-400'" style="font-size: 24px;" />
         </div>
 
-        <!-- Debug warning for missing ID (dev only) -->
-        <div v-else-if="isDev" class="absolute top-4 right-4 bg-red-500 text-white text-xs p-1 rounded">
-            No ID
-        </div>
-
         <NuxtLink :to="`/product-details?id=${validItemId}&?name=${item.title}`">
             <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
 
@@ -71,8 +66,6 @@ const props = defineProps({
     productId: { type: [String, Number], required: true },
     persistKey: { type: String, default: "fav_products" }
 })
-
-const isDev = computed(() => process.env.NODE_ENV === 'development')
 
 // ✅ BULLETPROOF ID resolution
 const validItemId = computed(() => {
@@ -185,14 +178,6 @@ onMounted(() => {
 
     // Check if this product is already favorited
     isFav.value = isProductFavorited(validItemId.value)
-
-    if (isDev.value) {
-        console.log('🔍 Favorite state initialized:', {
-            validItemId: validItemId.value,
-            isFav: isFav.value,
-            productData: createFavoriteProduct.value
-        })
-    }
 })
 
 const openAuthModal = () => {
@@ -228,15 +213,7 @@ const toggleFav = () => {
 
     const currentFavs = getLocalFavs()
 
-    if (isDev.value) {
-        console.log('🔄 Toggling favorite:', {
-            itemId: validItemId.value,
-            currentlyFav: isFav.value,
-            productToSave: createFavoriteProduct.value
-        })
-    }
-
-    let newFavs
+    let newFavs;
 
     if (isFav.value) {
         // REMOVE from favorites - filter out by ID
@@ -256,7 +233,6 @@ const toggleFav = () => {
                 autoClose: 1500,
                 position: toast.POSITION.BOTTOM_CENTER,
             })
-            if (isDev.value) console.log('✅ Removed from favorites:', validItemId.value)
         } else {
             toast.error("❌ Failed to remove from favorites")
         }
@@ -285,41 +261,15 @@ const toggleFav = () => {
                 autoClose: 1000,
                 position: toast.POSITION.BOTTOM_CENTER,
             })
-            if (isDev.value) {
-                console.log('✅ Added complete product to favorites:', createFavoriteProduct.value)
-            }
         } else {
             toast.error("❌ Failed to add to favorites")
         }
-    }
-
-    if (isDev.value) {
-        console.log('🏁 Final favorite state:', {
-            isFav: isFav.value,
-            totalFavs: newFavs?.length,
-            sampleFav: newFavs?.[0] // Show structure of saved data
-        })
     }
 }
 
 // 🔍 UTILITY: Get all favorite products with full details
 const getAllFavoriteProducts = () => {
     return getLocalFavs().filter(item => typeof item === 'object' && item !== null)
-}
-
-// 🛠️Debug helpers (dev only)
-if (isDev.value) {
-    window.favoriteDebug = {
-        validItemId,
-        isFav,
-        createFavoriteProduct,
-        getLocalFavs,
-        setLocalFavs,
-        toggleFav,
-        getAllFavoriteProducts,
-        isProductFavorited,
-        props
-    }
 }
 </script>
 
