@@ -6,18 +6,68 @@
                 Ecommerce
             </NuxtLink>
 
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex space-x-6">
-                <ul class="md:flex space-x-6">
-                    <li v-for="link in navLinks" :key="link.name">
-                        <NuxtLink v-if="link.action === 'logout'" @click="handleLogout" class="hover:underline">
-                            {{ link.name }}
-                        </NuxtLink>
+            <div class="w-[80%] flex items-center justify-between">
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-6">
+                    <ul class="md:flex space-x-6">
+                        <li v-for="link in navLinks" :key="link.name">
+                            <NuxtLink :to="link.href" class="hover:underline">
+                                {{ link.name }}
+                            </NuxtLink>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="w-[50%] mx-auto">
+                    <div class="relative">
+                        <!-- Search Icon -->
+                        <Icon name="mdi:magnify" width="24" height="24"
+                            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
 
-                        <NuxtLink v-else :to="link.href" class="hover:underline">{{ link.name }}</NuxtLink>
-                    </li>
-                </ul>
-            </nav>
+                        <!-- Input Box -->
+                        <input type="text" placeholder="Search..."
+                            class="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="flex items-center justify-between flex-wrap">
+                        <NuxtLink class="hover:underline flex flex-wrap justify-center mr-6 text-base">
+                            <Icon icon="mdi:user" width="24" height="24" class="w-full" />
+                            Profile
+                            <div
+                                class="absolute top-14 left-0 mt-2 w-48 bg-white shadow-lg border rounded-lg opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-all duration-200 z-50">
+                                <ul class="flex flex-col divide-y divide-gray-200">
+                                    <!-- Login / Sign Up -->
+                                    <li v-if="!isLoggedIn">
+                                        <NuxtLink to="/login"
+                                            class="block px-4 py-2 hover:bg-gray-100 text-gray-700 font-medium">
+                                            Login / Sign Up
+                                        </NuxtLink>
+                                    </li>
+
+                                    <li v-for="link in profileLink" :key="link.name">
+                                        <NuxtLink :to="link.href"
+                                            class="block px-4 py-2 hover:bg-gray-100 text-gray-700">
+                                            {{ link.name }}
+                                        </NuxtLink>
+                                    </li>
+                                    <li v-if="isLoggedIn">
+                                        <NuxtLink to="/" class="block px-4 py-2 hover:bg-gray-100 text-gray-700"
+                                            @click="handleLogout">
+                                            Log Out
+                                        </NuxtLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </NuxtLink>
+                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
+                            <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
+                            WishList
+                        </NuxtLink>
+                    </div>
+                </div>
+
+            </div>
 
             <!-- Mobile Hamburger -->
             <button @click="isOpen = !isOpen" class="md:hidden flex flex-col space-y-1 focus:outline-none">
@@ -43,11 +93,12 @@
 </template>
 
 <script setup>
+import { Icon } from "@iconify/vue";
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 const isOpen = ref(false);
-
+const myProfile = ref(false);
 const router = useRouter()
 const { isLoggedIn, logout } = useAuth()
 
@@ -56,11 +107,15 @@ const { isLoggedIn, logout } = useAuth()
 const navLinks = computed(() => [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/shop' },
-    { name: 'Basket', href: '/basket' },
-    isLoggedIn.value
-        ? { name: 'Logout', action: 'logout' }
-        : { name: 'Login / Sign Up', href: '/login' }
+    { name: 'Basket', href: '/basket' }
 ]);
+
+const profileLink = computed(() => [
+    { name: 'Orders', href: '/' },
+    { name: 'WishList', href: '/wishlist' },
+    { name: 'Gift Card', href: '/giftcard' },
+    { name: 'Contact Us', href: '/contactus' },
+])
 
 
 
