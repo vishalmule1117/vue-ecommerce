@@ -67,7 +67,7 @@ const props = defineProps({
     persistKey: { type: String, default: "fav_products" }
 })
 
-// ✅ BULLETPROOF ID resolution
+//BULLETPROOF ID resolution
 const validItemId = computed(() => {
     const candidates = [
         props.productId,

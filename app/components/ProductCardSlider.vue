@@ -2,7 +2,7 @@
     <Carousel v-bind="config">
         <Slide v-for="product in products" :key="product._id">
             <div class="p-4 ProductSlider">
-                <ProductCard :item="product" />
+                <ProductCard :item="product" :productId="product._id" />
             </div>
         </Slide>
 
