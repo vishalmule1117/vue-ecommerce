@@ -4,9 +4,9 @@
 
             <!-- Brand / About -->
             <div>
-                <h2 class="text-xl font-semibold text-white mb-4">MyBrand</h2>
+                <h2 class="text-xl font-semibold text-white mb-4">Ecommerce</h2>
                 <p class="text-sm leading-relaxed text-gray-300">
-                    Building modern web experiences with Nuxt.js and TailwindCSS.
+                    Building modern web experiences with Nuxt.js, Node, Express, MongoDB
                 </p>
             </div>
 
