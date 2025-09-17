@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-16">
+    <div class="mt-20">
         <client-only>
 
             <div class="home-page-banner">

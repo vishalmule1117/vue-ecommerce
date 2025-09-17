@@ -29,9 +29,9 @@
                     </div>
                 </div>
 
-                <div class="relative group">
+                <div class="">
                     <div class="flex items-center justify-between flex-wrap">
-                        <NuxtLink class="hover:underline flex flex-wrap justify-center mr-6 text-base">
+                        <NuxtLink class="group relative hover:underline flex flex-wrap justify-center mr-4 text-base">
                             <Icon icon="mdi:user" width="24" height="24" class="w-full" />
                             Profile
                             <div
@@ -54,15 +54,19 @@
                                     <li v-if="isLoggedIn">
                                         <NuxtLink to="/" class="block px-4 py-2 hover:bg-gray-100 text-gray-700"
                                             @click="handleLogout">
-                                            Log Out
+                                            Logout
                                         </NuxtLink>
                                     </li>
                                 </ul>
                             </div>
                         </NuxtLink>
-                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
+                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base mr-4">
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
+                        </NuxtLink>
+                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
+                            <Icon icon="mdi:cart" width="24" height="24" class=" w-full" />
+                            Cart
                         </NuxtLink>
                     </div>
                 </div>
@@ -98,7 +102,6 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 const isOpen = ref(false);
-const myProfile = ref(false);
 const router = useRouter()
 const { isLoggedIn, logout } = useAuth()
 
@@ -112,12 +115,11 @@ const navLinks = computed(() => [
 
 const profileLink = computed(() => [
     { name: 'Orders', href: '/' },
-    { name: 'WishList', href: '/wishlist' },
-    { name: 'Gift Card', href: '/giftcard' },
-    { name: 'Contact Us', href: '/contactus' },
+    { name: 'WishList', href: '' },
+    { name: 'Gift Card', href: '' },
+    { name: 'Save Address', href: '' },
+    { name: 'Contact Us', href: '' },
 ])
-
-
 
 const handleLogout = async () => {
     await logout({ callServer: true })
