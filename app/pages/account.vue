@@ -46,7 +46,11 @@
                         </div>
                     </section>
                     <section v-if="activeTab === 'favourite'">
-                        Favourite
+                        <div v-if="favorites.length" class="grid grid-cols-2 md:grid-cols-3 gap-6 p-4 w-full">
+                            <ProductCard v-for="item in favorites" :key="item._id" :item="item" showDelete
+                                @remove="removeFromFev" />
+                        </div>
+                        <p v-else class="text-gray-500 text-center">No favorite products yet.</p>
                     </section>
                 </div>
 
@@ -56,9 +60,11 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue"
+import { Icon } from "@iconify/vue";
 import { useAuth } from '../composables/useAuth'
 const { user, isLoggedIn } = useAuth();
-
+const favorites = ref([]);
 const activeTab = ref("personal");
 const menuItems = [
     { key: "personal", label: "Personal Info" },
@@ -68,4 +74,16 @@ const menuItems = [
     { key: "address", label: "Your Address" },
     { key: "change-password", label: "Change Password" },
 ]
+
+onMounted(() => {
+    const stored = JSON.parse(localStorage.getItem("fav_products") || "[]")
+    favorites.value = stored;
+    console.log(favorites.value)
+});
+
+function removeFromFev(productId) {
+    favorites.value = favorites.value.filter(item => item._id !== productId);
+    localStorage.setItem("fav_products", JSON.stringify(favorites.value));
+}
+
 </script>

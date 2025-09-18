@@ -7,8 +7,13 @@
         <!-- Only show favorite button if we have a valid ID -->
         <div v-if="validItemId" class="absolute top-4 right-4" @click="toggleFav"
             :class="isFav ? 'favourite-on' : 'favourite-off'">
-            <Icon :name="isFav ? 'mdi:heart' : 'mdi:heart-outline'" class="cursor-pointer transition-all duration-200"
+            <Icon :icon="isFav ? 'mdi:heart' : 'mdi:heart-outline'" class="cursor-pointer transition-all duration-200"
                 :class="isFav ? 'text-red-500' : 'text-gray-400 hover:text-red-400'" style="font-size: 24px;" />
+        </div>
+
+        <div v-if="showDelete" @click="$emit('remove', item._id)"
+            class="absolute top-2 right-2 bg-white rounded-full p-1 shadow group cursor-pointer">
+            <Icon icon="mdi:delete" width="24" height="24" />
         </div>
 
         <NuxtLink :to="`/product-details?id=${validItemId}&?name=${item.title}`">
@@ -53,6 +58,7 @@ import { useAuth } from '../composables/useAuth'
 import { useAuthModal } from '../composables/useAuthModal'
 import { useCartDrawer, useCartItems } from '../composables/useCartDrawer'
 import { NuxtLink } from "#components"
+import { Icon } from "@iconify/vue";
 
 const { isLoggedIn } = useAuth()
 const isFav = ref(false)
@@ -64,9 +70,10 @@ const { addToCart } = useCartItems()
 const props = defineProps({
     item: { type: Object, required: true },
     productId: { type: [String, Number], required: true },
-    persistKey: { type: String, default: "fav_products" }
+    persistKey: { type: String, default: "fav_products" },
+    showDelete: { type: Boolean, default: false }
 })
-
+const emit = defineEmits(["remove"])
 //BULLETPROOF ID resolution
 const validItemId = computed(() => {
     const candidates = [
