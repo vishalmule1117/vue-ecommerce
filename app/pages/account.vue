@@ -32,7 +32,6 @@
                         <h2 class="text-2xl font-semibold mb-4">{{menuItems.find(item => item.key ===
                             activeTab)?.label}}
                         </h2>
-                        <button class="cursor-pointer">Edit</button>
                     </div>
 
                     <section v-if="activeTab === 'personal'">
