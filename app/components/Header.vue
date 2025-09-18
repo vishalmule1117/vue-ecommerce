@@ -64,10 +64,10 @@
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
                         </NuxtLink>
-                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
+                        <!-- <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
                             <Icon icon="mdi:cart" width="24" height="24" class=" w-full" />
                             Cart
-                        </NuxtLink>
+                        </NuxtLink> -->
                     </div>
                 </div>
 
@@ -102,9 +102,8 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 const isOpen = ref(false);
-const router = useRouter()
-const { isLoggedIn, logout } = useAuth()
-
+const router = useRouter();
+const { isLoggedIn, logout } = useAuth();
 
 // Short and clean navLinks — only the last item swaps
 const navLinks = computed(() => [
@@ -114,6 +113,7 @@ const navLinks = computed(() => [
 ]);
 
 const profileLink = computed(() => [
+    ...(isLoggedIn.value ? [{ name: 'My Profile', href: '/account' }] : []),
     { name: 'Orders', href: '/' },
     { name: 'WishList', href: '' },
     { name: 'Gift Card', href: '' },

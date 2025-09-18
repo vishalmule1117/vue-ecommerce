@@ -9,10 +9,23 @@ export function useAuth() {
   // ③ computed convenience
   const isLoggedIn = computed(() => !!token.value);
 
-  onMounted(() => {
+  onMounted(async () => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       token.value = savedToken;
+      try {
+        const me = await $fetch(
+          "https://node-rest-api-ecommerce.onrender.com/api/auth/me",
+          {
+            headers: { Authorization: `Bearer ${savedToken}` },
+          }
+        );
+        user.value = me;
+        console.log("Fetched user:", user.value);
+      } catch (err) {
+        console.error("Failed to fetch user profile", err);
+        user.value = null;
+      }
     }
   });
 

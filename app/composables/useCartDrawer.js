@@ -42,6 +42,11 @@ export const useCartItems = () => {
     } else {
       exits.quantity = 1;
     }
+
+    //total count for badge
+    const cartCount = computed(() => {
+      items.value.push({ ...product, quantity: 1 });
+    });
   }
 
   // remove signle product by ID
