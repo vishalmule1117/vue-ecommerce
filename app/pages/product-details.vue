@@ -64,7 +64,16 @@
 
                     <div class="md:col-span-5">
                         <p class="capitalize">{{ product.category }}</p>
-                        <h1 class="text-2xl md:text-3xl font-semibold mb-2">{{ product.title }}</h1>
+                        <h1 class="text-2xl md:text-3xl font-semibold mb-2">
+                            {{ product.title }}
+                            <button @click="toggleWish(product)"
+                                class="p-2 rounded-full border hover:bg-gray-100 transition cursor-pointer">
+                                Wishlist
+                                <Icon :name="isInWishlist(product._id) ? 'mdi:heart' : 'mdi:heart-outline'"
+                                    class="text-2xl"
+                                    :class="isInWishlist(product._id) ? 'text-red-500' : 'text-gray-400'" />
+                            </button>
+                        </h1>
 
                         <div class="flex items-center gap-4 mb-4">
                             <div class="text-2xl md:text-3xl font-bold">₹ {{ product.price }}</div>
@@ -141,16 +150,26 @@ import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { useCartItems } from "../composables/useCartDrawer";
 import Testimonial from "~/components/Testimonial.vue";
+import { useWishlist } from "/composables/useWishList";
 const route = useRoute();
-const product = ref({});
+const productData = ref({});
 const review = ref([]);
 const pending = ref(false);
 const { items, addToCart, increaseQty, decreaseQty } = useCartItems();
+const { toggleWishlist, isInWishlist } = useWishlist();
+const product = computed(() => productData.value || {});
 
 const quantity = computed(() => {
     const item = items.value.find(i => i._id === product.value._id);
     return item?.quantity || 0;
 });
+
+
+// Map your button click to the composable function
+const toggleWish = (product) => {
+    if (!product || !product?._id) return;
+    toggleWishlist(product);
+}
 
 const fetchProduct = async () => {
     try {
@@ -162,7 +181,7 @@ const fetchProduct = async () => {
 
         const data = await res.json();
         //Assign directly since backend returns the product object
-        product.value = data;
+        productData.value = data;
     } catch (error) {
         console.error("Error fetching product:", error);
     } finally {
@@ -173,4 +192,5 @@ const fetchProduct = async () => {
 onMounted(async () => {
     await fetchProduct()
 });
+
 </script>

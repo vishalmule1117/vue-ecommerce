@@ -19,7 +19,7 @@
         <NuxtLink :to="`/product-details?id=${validItemId}&?name=${item.title}`">
             <span class="text-gray-400 py-3 uppercase text-xs h-10 block">{{ item.brand }}</span>
 
-            <h3 class="text-lg font-bold text-black truncate capitalize h-[35px]">{{ item.title }}</h3>
+            <h3 class="text-lg font-bold text-black truncate capitalize h-[35px]">{{ item.title || 'No Title' }}</h3>
         </NuxtLink>
 
         <div class="flex items-center">

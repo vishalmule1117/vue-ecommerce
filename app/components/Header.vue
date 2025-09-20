@@ -20,7 +20,7 @@
                 <div class="w-[50%] mx-auto">
                     <div class="relative">
                         <!-- Search Icon -->
-                        <Icon name="mdi:magnify" width="24" height="24"
+                        <Icon icon="mdi:magnify" width="24" height="24"
                             class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
 
                         <!-- Input Box -->
@@ -60,7 +60,13 @@
                                 </ul>
                             </div>
                         </NuxtLink>
-                        <NuxtLink class="hover:underline flex flex-wrap justify-center text-base mr-4">
+                        <NuxtLink v-if="isLoggedIn" to="/account?tab=wishlist"
+                            class="hover:underline flex flex-wrap justify-center text-base mr-4">
+                            <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
+                            WishList
+                        </NuxtLink>
+                        <NuxtLink @click="openAuthModal" v-if="!isLoggedIn"
+                            class="hover:underline flex flex-wrap justify-center text-base mr-4">
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
                         </NuxtLink>
@@ -100,9 +106,11 @@
 import { Icon } from "@iconify/vue";
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuth } from '../composables/useAuth'
+import { useAuth } from '../composables/useAuth';
+import { useAuthModal } from '../composables/useAuthModal';
 const isOpen = ref(false);
 const router = useRouter();
+const authModal = useAuthModal()
 const { isLoggedIn, logout } = useAuth();
 
 // Short and clean navLinks — only the last item swaps
@@ -113,17 +121,21 @@ const navLinks = computed(() => [
 ]);
 
 const profileLink = computed(() => [
-    ...(isLoggedIn.value ? [{ name: 'My Profile', href: '/account' }] : []),
-    { name: 'Orders', href: '/' },
-    { name: 'WishList', href: '' },
-    { name: 'Gift Card', href: '' },
-    { name: 'Save Address', href: '' },
-    { name: 'Contact Us', href: '' },
+    ...(isLoggedIn.value ? [{ name: 'profile', href: '/account?tab=profile' }] : []),
+    { name: 'favourite', href: '/account?tab=favourite' },
+    { name: 'Orders', href: '/account?tab=orders' },
+    { name: 'WishList', href: '/account?tab=wishlist' },
+    { name: 'Gift Card', href: '/account?tab=GiftCard' },
+    { name: 'Save Address', href: '/account?tab=SaveAddress' },
+    { name: 'Contact Us', href: '/account?tab=ContactUs' },
 ])
 
 const handleLogout = async () => {
     await logout({ callServer: true })
     router.push('/')
+}
+const openAuthModal = () => {
+    authModal.value = true
 }
 </script>
 

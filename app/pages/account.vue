@@ -34,7 +34,7 @@
                         </h2>
                     </div>
 
-                    <section v-if="activeTab === 'personal'">
+                    <section v-if="activeTab === 'profile'">
                         <div v-if="isLoggedIn">
                             <div>
                                 Your Name : {{ user?.name }}
@@ -51,6 +51,19 @@
                         </div>
                         <p v-else class="text-gray-500 text-center">No favorite products yet.</p>
                     </section>
+
+                    <section v-if="activeTab === 'wishlist'">
+                        <div v-if="wishlist.length === 0" class="text-gray-500 text-center">
+                            Your wishlist is empty.
+                        </div>
+
+                        <div v-else class="grid grid-cols-2 md:grid-cols-3 gap-6 p-4 w-full">
+                            <ProductCard v-for="item in wishlist" :key="item._id" :item="item" :productId="item._id"
+                                :showDelete="true" @remove="removeFromWishlist" />
+                        </div>
+                    </section>
+
+
                 </div>
 
             </main>
@@ -61,17 +74,38 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import { Icon } from "@iconify/vue";
+import { useRoute, useRouter } from "vue-router"
 import { useAuth } from '../composables/useAuth'
+import { useWishlist } from "../composables/useWishList"
+
+const route = useRoute()
+const router = useRouter()
 const { user, isLoggedIn } = useAuth();
 const favorites = ref([]);
-const activeTab = ref("personal");
+const { wishlist, removeFromWishlist } = useWishlist();
+
+defineProps({
+    item: {
+        type: Object,
+        required: true
+    }
+});
+
+const activeTab = computed({
+    get: () => route.query.tab || 'profile',
+    set: (value) => {
+        router.push({ query: { ...router.query, tab: value } })
+    }
+});
+
 const menuItems = [
-    { key: "personal", label: "Personal Info" },
-    { key: "favourite", label: "Favourite" },
-    { key: "bank", label: "Your Bank Details" },
-    { key: "orders", label: "Your Orders" },
-    { key: "address", label: "Your Address" },
-    { key: "change-password", label: "Change Password" },
+    { key: "profile", label: "Personal", href: '/account?tab=profile' },
+    { key: 'favourite', label: "Favourite", href: '/account?tab=favourite' },
+    { key: 'wishlist', label: "WishList", href: '/account?tab=wishlist' },
+    { key: 'orders', label: "Orders", href: '/account?tab=orders' },
+    { key: 'GiftCard', label: "Gift Card", href: '/account?tab=GiftCard' },
+    { key: 'SaveAddress', label: "Save Address", href: '/account?tab=SaveAddress' },
+    { key: 'ContactUs', label: "Contact Us", href: '/account?tab=ContactUs' },
 ]
 
 onMounted(() => {
