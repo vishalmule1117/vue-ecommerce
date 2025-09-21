@@ -2,6 +2,11 @@
 import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_URL || "http://localhost:3002/api",
+    }
+  },
   nitro: {
     preset: 'node-server', // ensure Node server build
   },

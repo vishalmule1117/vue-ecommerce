@@ -31,21 +31,23 @@
     </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import BannerSlider from '~/components/BannerSlider.vue';
-const products = ref([]);
-const error = ref(false);
-const showModal = ref(false);
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import BannerSlider from '~/components/BannerSlider.vue'
 
-// Fetch products from API
+const config = useRuntimeConfig()
+
+const products = ref([])
+const error = ref(false)
+const showModal = ref(false)
+
 onMounted(async () => {
     try {
-        const response = await axios.get('https://node-rest-api-ecommerce.onrender.com/api/products/')
-        products.value = response.data.productList || [];
+        const { data } = await axios.get(`${config.public.apiBase}/products?all=true`)
+        products.value = data.productList || []
     } catch (err) {
-        console.error('Failed to fetch products', err);
-        error.value = true;
+        console.error('❌ Failed to fetch products:', err.message)
+        error.value = true
     }
 })
 </script>
