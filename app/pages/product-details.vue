@@ -47,7 +47,9 @@
                     </div>
                 </div>
             </div>
+
             <div v-else-if="!product" class="text-center py-12">Product not found.</div>
+
             <section class="bg-white rounded-2xl shadow p-6 md:p-10" v-else>
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
 
@@ -66,13 +68,6 @@
                         <p class="capitalize">{{ product.category }}</p>
                         <h1 class="text-2xl md:text-3xl font-semibold mb-2">
                             {{ product.title }}
-                            <button @click="toggleWish(product)"
-                                class="p-2 rounded-full border hover:bg-gray-100 transition cursor-pointer">
-                                Wishlist
-                                <Icon :name="isInWishlist(product._id) ? 'mdi:heart' : 'mdi:heart-outline'"
-                                    class="text-2xl"
-                                    :class="isInWishlist(product._id) ? 'text-red-500' : 'text-gray-400'" />
-                            </button>
                         </h1>
 
                         <div class="flex items-center gap-4 mb-4">
@@ -100,6 +95,14 @@
                             <button v-else @click="addToCart(product)"
                                 class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition cursor-pointer">Add
                                 to cart</button>
+
+                            <div @click="toggleWish(product)"
+                                class="flex items-center justify-center text-xs py-2 px-4 rounded-xl border hover:bg-gray-100 transition cursor-pointer">
+                                Wishlist
+                                <Icon :name="isInWishlist(product._id) ? 'mdi:heart' : 'mdi:heart-outline'"
+                                    class="text-2xl"
+                                    :class="isInWishlist(product._id) ? 'text-red-500' : 'text-gray-400'" />
+                            </div>
                         </div>
 
                         <div class="text-sm text-slate-500">

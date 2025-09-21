@@ -11,11 +11,25 @@
             </ol>
         </nav>
 
-        <div class="flex">
+        <div v-if="!isLoggedIn"
+            class="bg-white rounded-xl shadow-md p-6 min-h-screen p-6 w-fill flex items-center justify-center text-center flex-wrap">
+            <div>
+                <div class="w-full">PLEASE LOG IN</div>
+                <div class="mt-5 mb-5 w-full">Login to view items in your wishlist.</div>
+
+                <NuxtLink to="/login"
+                    class="py-2 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:scale-105 transform transition cursor-pointer">
+                    Login</NuxtLink>
+
+            </div>
+        </div>
+        <div class="flex" v-if="isLoggedIn">
             <div class="">
                 <aside class="w-64 bg-white shadow-md pt-6 pb-6 py-0 hidden md:block">
                     <div class="px-4 py-2 ">
                         Hello , {{ user?.name }}
+                        <br>
+                        A/C Number : {{ user?.accountNumber }}
                     </div>
                     <nav class="space-y-4">
                         <button v-for="item in menuItems" :key="item.key" @click="activeTab = item.key"
@@ -74,9 +88,10 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import { Icon } from "@iconify/vue";
-import { useRoute, useRouter } from "vue-router"
-import { useAuth } from '../composables/useAuth'
-import { useWishlist } from "../composables/useWishList"
+import { useRoute, useRouter } from "vue-router";
+import { useAuth } from '../composables/useAuth';
+import { useWishlist } from "../composables/useWishList";
+import { NuxtLink } from "#components";
 
 const route = useRoute()
 const router = useRouter()

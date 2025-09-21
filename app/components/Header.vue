@@ -121,10 +121,10 @@ const navLinks = computed(() => [
 ]);
 
 const profileLink = computed(() => [
-    ...(isLoggedIn.value ? [{ name: 'profile', href: '/account?tab=profile' }] : []),
-    { name: 'favourite', href: '/account?tab=favourite' },
-    { name: 'Orders', href: '/account?tab=orders' },
+    ...(isLoggedIn.value ? [{ name: 'Profile', href: '/account?tab=profile' }] : []),
+    { name: 'Favourite', href: '/account?tab=favourite' },
     { name: 'WishList', href: '/account?tab=wishlist' },
+    { name: 'Orders', href: '/account?tab=orders' },
     { name: 'Gift Card', href: '/account?tab=GiftCard' },
     { name: 'Save Address', href: '/account?tab=SaveAddress' },
     { name: 'Contact Us', href: '/account?tab=ContactUs' },
