@@ -27,9 +27,9 @@
             <div class="">
                 <aside class="w-64 bg-white shadow-md pt-6 pb-6 py-0 hidden md:block">
                     <div class="px-4 py-2 ">
-                        Hello , {{ user?.name }}
-                        <br>
-                        A/C Number : {{ user?.accountNumber }}
+                        <span class="block mb-1"> Hello, {{ user?.name }}</span>
+
+                        <span> A/C Number : {{ user?.accountNumber }}</span>
                     </div>
                     <nav class="space-y-4">
                         <button v-for="item in menuItems" :key="item.key" @click="activeTab = item.key"
