@@ -31,7 +31,8 @@
 
                 <div class="">
                     <div class="flex items-center justify-between flex-wrap">
-                        <NuxtLink class="group relative hover:underline flex flex-wrap justify-center mr-4 text-base">
+                        <div
+                            class="group relative hover:underline flex flex-wrap justify-center mr-4 text-base cursor-pointer">
                             <Icon icon="mdi:user" width="24" height="24" class="w-full" />
                             Profile
                             <div
@@ -59,7 +60,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </NuxtLink>
+                        </div>
                         <NuxtLink v-if="isLoggedIn" to="/account?tab=wishlist"
                             class="hover:underline flex flex-wrap justify-center text-base mr-4">
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />

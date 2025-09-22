@@ -10,7 +10,8 @@
       <div class="bg-white rounded-lg p-6 w-96 relative">
         <div class="flex ">
           <h2 class="text-xl font-semibold mb-4 text-center w-full">Please choose an option below</h2>
-          <button @click="closeAuthModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+          <button @click="closeAuthModal"
+            class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer">
             X
           </button>
         </div>

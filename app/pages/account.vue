@@ -77,7 +77,9 @@
                         </div>
                     </section>
 
-
+                    <section v-if="activeTab === 'ContactUs'">
+                        <AccountContact />
+                    </section>
                 </div>
 
             </main>
@@ -92,6 +94,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useAuth } from '../composables/useAuth';
 import { useWishlist } from "../composables/useWishList";
 import { NuxtLink } from "#components";
+import AccountContact from "~/components/AccountContact.vue";
 
 const route = useRoute()
 const router = useRouter()
