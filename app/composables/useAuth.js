@@ -2,6 +2,8 @@ import { ref, computed, onMounted } from "vue";
 
 // ① export a function named `useAuth` so Nuxt auto-imports if needed
 export function useAuth() {
+  const config = useRuntimeConfig();
+
   // ② Use Nuxt's useState for SSR-friendly shared state
   const token = useState("auth_token", () => null);
   const user = useState("auth_user", () => null);
@@ -14,12 +16,9 @@ export function useAuth() {
     if (savedToken) {
       token.value = savedToken;
       try {
-        const me = await $fetch(
-          "https://node-rest-api-ecommerce.onrender.com/api/auth/me",
-          {
-            headers: { Authorization: `Bearer ${savedToken}` },
-          }
-        );
+        const me = await $fetch(`${config.public.apiBase}/auth/me`, {
+          headers: { Authorization: `Bearer ${savedToken}` },
+        });
         user.value = me;
         console.log("Fetched user:", user.value);
       } catch (err) {

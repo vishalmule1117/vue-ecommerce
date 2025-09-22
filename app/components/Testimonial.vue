@@ -24,15 +24,6 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- Call to Action -->
-        <!-- <div class="mt-20">
-                    <a href="#"
-                        class="inline-block px-8 py-4 bg-gradient-to-r from-[#B2E5D9] to-[#5D8AA8] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                        See All Case Studies
-                    </a>
-                </div> -->
     </div>
 </template>
 

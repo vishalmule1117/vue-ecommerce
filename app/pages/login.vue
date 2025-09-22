@@ -52,10 +52,11 @@ const { login } = useAuth();
 const email = ref("");
 const password = ref("");
 const router = useRouter();
+const config = useRuntimeConfig()
 
 const handleLogin = async () => {
     try {
-        const res = await $fetch("https://node-rest-api-ecommerce.onrender.com/api/auth/login", {
+        const res = await $fetch(`${config.public.apiBase}/auth/login`, {
             method: "POST",
             body: { email: email.value, password: password.value },
         });

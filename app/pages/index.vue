@@ -35,7 +35,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import BannerSlider from '~/components/BannerSlider.vue'
 
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
 const products = ref([])
 const error = ref(false)

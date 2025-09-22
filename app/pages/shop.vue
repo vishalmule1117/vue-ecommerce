@@ -49,12 +49,12 @@ const pending = ref(false);
 const page = ref(1);
 const totalPages = ref(1);
 const limit = 8;
+const config = useRuntimeConfig();
 
 async function fetchProduct() {
     try {
         pending.value = true;
-        let url = "https://node-rest-api-ecommerce.onrender.com/api/products?";
-        //let url = "http://localhost:3002/api/products/"
+        let url = `${config.public.apiBase}/products?`;
 
         if (sortOption.value) {
             url += `sort=${sortOption.value}&`;

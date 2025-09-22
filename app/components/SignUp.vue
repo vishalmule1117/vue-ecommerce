@@ -62,10 +62,11 @@ const email = ref("");
 const password = ref("");
 
 const router = useRouter();
+const config = useRuntimeConfig();
 
 const handelSignup = async () => {
     try {
-        const res = await fetch("https://node-rest-api-ecommerce.onrender.com/api/auth/signup", {
+        const res = await fetch(`${config.public.apiBase}/auth/signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

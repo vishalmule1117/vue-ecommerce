@@ -161,6 +161,7 @@ const pending = ref(false);
 const { items, addToCart, increaseQty, decreaseQty } = useCartItems();
 const { toggleWishlist, isInWishlist } = useWishlist();
 const product = computed(() => productData.value || {});
+const config = useRuntimeConfig();
 
 const quantity = computed(() => {
     const item = items.value.find(i => i._id === product.value._id);
@@ -177,7 +178,7 @@ const toggleWish = (product) => {
 const fetchProduct = async () => {
     try {
         pending.value = true;
-        const url = `https://node-rest-api-ecommerce.onrender.com/api/products/${route.query.id}`;
+        const url = `${config.public.apiBase}/products/${route.query.id}`;
         const res = await fetch(url);
 
         if (!res.ok) throw new Error("Failed to fetch product");
