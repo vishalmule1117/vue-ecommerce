@@ -77,6 +77,10 @@
                         </div>
                     </section>
 
+                    <section v-if="activeTab === 'SaveAddress'">
+                        <AddressList />
+                    </section>
+
                     <section v-if="activeTab === 'ContactUs'">
                         <AccountContact />
                     </section>
@@ -94,19 +98,17 @@ import { useRoute, useRouter } from "vue-router";
 import { useAuth } from '../composables/useAuth';
 import { useWishlist } from "../composables/useWishList";
 import { NuxtLink } from "#components";
-import AccountContact from "~/components/AccountContact.vue";
 
 const route = useRoute()
 const router = useRouter()
 const { user, isLoggedIn } = useAuth();
 const favorites = ref([]);
 const { wishlist, removeFromWishlist } = useWishlist();
-
 defineProps({
     item: {
         type: Object,
         required: true
-    }
+    },
 });
 
 const activeTab = computed({
@@ -129,7 +131,7 @@ const menuItems = [
 onMounted(() => {
     const stored = JSON.parse(localStorage.getItem("fav_products") || "[]")
     favorites.value = stored;
-    console.log(favorites.value)
+    console.log(favorites.value);
 });
 
 function removeFromFev(productId) {
