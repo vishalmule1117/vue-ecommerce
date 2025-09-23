@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-20">
+    <div class="md:mt-20 mt-[68px]">
         <client-only>
 
             <div class="home-page-banner">

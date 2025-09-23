@@ -7,7 +7,8 @@
                     <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
                 </li>
                 <li>/</li>
-                <li class="text-slate-700"> My Profile</li>
+                <li class="text-slate-700"> {{menuItems.find(item => item.key ===
+                    activeTab)?.label}}</li>
             </ol>
         </nav>
 

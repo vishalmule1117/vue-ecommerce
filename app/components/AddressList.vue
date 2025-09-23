@@ -11,7 +11,7 @@
         </div>
 
         <!-- No Addresses Message -->
-        <p v-if="!loading && addresses.length === 0">
+        <p v-if="addresses.length === 0">
             No addresses saved yet.
         </p>
 

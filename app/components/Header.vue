@@ -32,7 +32,7 @@
                 <div class="">
                     <div class="flex items-center justify-between flex-wrap">
                         <div
-                            class="group relative hover:underline flex flex-wrap justify-center mr-4 text-base cursor-pointer">
+                            class="group relative hover:underline flex flex-wrap justify-center mr-4 text-base cursor-pointer hidden lg:block">
                             <Icon icon="mdi:user" width="24" height="24" class="w-full" />
                             Profile
                             <div
@@ -62,12 +62,12 @@
                             </div>
                         </div>
                         <NuxtLink v-if="isLoggedIn" to="/account?tab=wishlist"
-                            class="hover:underline flex flex-wrap justify-center text-base mr-4">
+                            class="hover:underline flex flex-wrap justify-center text-base mr-4 hidden lg:block">
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
                         </NuxtLink>
                         <NuxtLink @click="openAuthModal" v-if="!isLoggedIn"
-                            class="hover:underline flex flex-wrap justify-center text-base mr-4">
+                            class="hover:underline flex flex-wrap justify-center text-base mr-4 hidden lg:block">
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
                         </NuxtLink>
@@ -81,7 +81,8 @@
             </div>
 
             <!-- Mobile Hamburger -->
-            <button @click="isOpen = !isOpen" class="md:hidden flex flex-col space-y-1 focus:outline-none">
+            <button @click="isOpen = !isOpen"
+                class="md:hidden flex flex-col space-y-1 focus:outline-none cursor-pointer">
                 <span class="block h-0.5 w-6 bg-gray-800 transition" :class="{ 'rotate-45 translate-y-1.5': isOpen }" />
                 <span class="block h-0.5 w-6 bg-gray-800 transition" :class="{ 'opacity-0': isOpen }" />
                 <span class="block h-0.5 w-6 bg-gray-800 transition"
@@ -97,6 +98,15 @@
                         class="text-gray-800 hover:text-indigo-600 transition font-medium" @click="isOpen = false">
                         {{ link.name }}
                     </NuxtLink>
+                    <NuxtLink v-for="link in profileLink" :to="link.href" :key="link.name" @click="isOpen = false"
+                        class="text-gray-800 hover:text-indigo-600 transition font-medium">
+                        {{ link.name }}
+                    </NuxtLink>
+                    <NuxtLink v-if="isLoggedIn" to="/"
+                        class="text-gray-800 hover:text-indigo-600 transition font-medium"
+                        @click="{ isOpen = false, handleLogout }">
+                        <span>Logout</span>
+                    </NuxtLink>
                 </nav>
             </div>
         </transition>
@@ -109,6 +119,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth';
 import { useAuthModal } from '../composables/useAuthModal';
+import { NuxtLink } from "#components";
 const isOpen = ref(false);
 const router = useRouter();
 const authModal = useAuthModal()
