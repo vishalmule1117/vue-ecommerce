@@ -103,8 +103,7 @@
                         {{ link.name }}
                     </NuxtLink>
                     <NuxtLink v-if="isLoggedIn" to="/"
-                        class="text-gray-800 hover:text-indigo-600 transition font-medium"
-                        @click="{ isOpen = false, handleLogout }">
+                        class="text-gray-800 hover:text-indigo-600 transition font-medium" @click="handleLogout()">
                         <span>Logout</span>
                     </NuxtLink>
                 </nav>
