@@ -71,10 +71,15 @@
                             <Icon icon="mdi:cards-heart-outline" width="24" height="24" class="w-full" />
                             WishList
                         </NuxtLink>
-                        <!-- <NuxtLink class="hover:underline flex flex-wrap justify-center text-base">
-                            <Icon icon="mdi:cart" width="24" height="24" class=" w-full" />
-                            Cart
-                        </NuxtLink> -->
+                        <NuxtLink class="hover:underline relative flex flex-col items-center text-base">
+                            <Icon icon="mdi:cart" width="24" height="24" class="w-6 h-6" />
+                            <span>Cart</span>
+                            <span v-if="cartCount > 0"
+                                class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 min-w-[1.25rem] flex items-center justify-center px-1.5">
+                                {{ cartCount }}
+                            </span>
+                        </NuxtLink>
+
                     </div>
                 </div>
 
@@ -118,11 +123,13 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth';
 import { useAuthModal } from '../composables/useAuthModal';
+import { useCartItems } from '../composables/useCartDrawer';
 import { NuxtLink } from "#components";
 const isOpen = ref(false);
 const router = useRouter();
-const authModal = useAuthModal()
+const authModal = useAuthModal();
 const { isLoggedIn, logout } = useAuth();
+const { cartCount } = useCartItems();
 
 // Short and clean navLinks — only the last item swaps
 const navLinks = computed(() => [

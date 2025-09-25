@@ -1,5 +1,5 @@
 <template>
-    <div :class="['mt-[68px]', 'md:mt-0']">
+    <div :class="['mt-[68px]', 'md:mt-20']">
         <client-only>
 
             <div class="home-page-banner">

@@ -39,15 +39,19 @@ export const useCartItems = () => {
     const exits = items.value.find((item) => item._id === product._id);
     if (!exits) {
       items.value.push({ ...product, quantity: 1 });
+      return true;
     } else {
-      exits.quantity = 1;
+      toast.info("Product already in cart!", {
+        position: "bottom-center",
+        autoClose: 1000,
+      });
     }
-
-    //total count for badge
-    const cartCount = computed(() => {
-      items.value.push({ ...product, quantity: 1 });
-    });
   }
+
+  //total count for badge
+  const cartCount = computed(() =>
+    items.value.reduce((total, item) => total + (item.quantity || 1), 0)
+  );
 
   // remove signle product by ID
   function removeFromCart(productID) {
@@ -94,6 +98,7 @@ export const useCartItems = () => {
     items,
     removeFromCart,
     addToCart,
+    cartCount,
     clearCart,
     increaseQty,
     decreaseQty,

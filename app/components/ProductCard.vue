@@ -196,14 +196,15 @@ const handleAddToCart = (item) => {
         toast.error("❌ Invalid item")
         return
     }
-
     try {
-        addToCart(item)
-        cartDrawer.value = true
-        toast.success("🛒 Added to cart!", {
-            autoClose: 1500,
-            position: toast.POSITION.BOTTOM_CENTER,
-        })
+        cartDrawer.value = true;
+        const added = addToCart(item);
+        if (added) {
+            toast.success("🛒 Added to cart!", {
+                autoClose: 1500,
+                position: toast.POSITION.BOTTOM_CENTER,
+            })
+        }
     } catch (error) {
         console.error('Error adding to cart:', error)
         toast.error("❌ Failed to add to cart")
