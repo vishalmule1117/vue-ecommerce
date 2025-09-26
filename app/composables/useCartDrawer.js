@@ -42,8 +42,8 @@ export const useCartItems = () => {
       return true;
     } else {
       toast.info("Product already in cart!", {
-        position: "bottom-center",
-        autoClose: 1000,
+        position: "top-center",
+        autoClose: 1500,
       });
     }
   }

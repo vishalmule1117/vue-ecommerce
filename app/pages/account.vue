@@ -1,7 +1,7 @@
 <template>
     <div class="min-h-screen container mx-auto py-10">
         <!-- Breadcrumb -->
-        <nav class="text-sm text-slate-500 mb-6 mt-10" aria-label="Breadcrumb">
+        <nav class="text-sm text-slate-500 mb-6 mt-15" aria-label="Breadcrumb">
             <ol class="flex gap-2 items-center">
                 <li>
                     <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
@@ -11,6 +11,7 @@
                     activeTab)?.label}}</li>
             </ol>
         </nav>
+
 
         <div v-if="!isLoggedIn"
             class="bg-white rounded-xl shadow-md p-6 min-h-screen p-6 w-fill flex items-center justify-center text-center flex-wrap">

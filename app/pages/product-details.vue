@@ -1,8 +1,9 @@
 <template>
     <div class="min-h-screen">
         <div class=" container mx-auto py-10">
+
             <!-- Breadcrumb -->
-            <nav class="text-sm text-slate-500 mb-6 mt-10" aria-label="Breadcrumb">
+            <nav class="text-sm text-slate-500 mb-6 mt-15" aria-label="Breadcrumb">
                 <ol class="flex gap-2 items-center">
                     <li>
                         <NuxtLink to="/" class="hover:underline">Home</NuxtLink>

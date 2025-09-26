@@ -1,19 +1,7 @@
 <template>
     <div class="min-h-screen container mx-auto py-10">
         <!-- Breadcrumb -->
-        <nav class="text-sm text-slate-500 mb-6 mt-10" aria-label="Breadcrumb">
-            <ol class="flex gap-2 items-center">
-                <li>
-                    <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
-                </li>
-                <li>/</li>
-                <li>
-                    <NuxtLink to="/" class="hover:underline">Category</NuxtLink>
-                </li>
-                <li>/</li>
-                <li class="text-slate-700"> Product</li>
-            </ol>
-        </nav>
+        <BreadCrumb class="text-sm text-slate-500 mb-6 mt-15" />
 
         <div class="flex justify-end my-8">
             <SortBy v-model="sortOption" />

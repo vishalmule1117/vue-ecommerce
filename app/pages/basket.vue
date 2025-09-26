@@ -1,5 +1,6 @@
 <template>
     <div class="container min-h-screen mx-auto py-10 page-center p-4">
+        <BreadCrumb />
         <div>
             <!-- Empty Cart -->
             <div class="empty-basket" v-if="cartItems.length == 0">
